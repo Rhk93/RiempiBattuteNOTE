@@ -6,41 +6,64 @@
 <title>Riempi la Battuta</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Music&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fdf6ec;--ink:#2b2340;--acc:#ff7a45;--ok:#2bb673;--bad:#e5484d;--card:#fff;--txt:#2b2340}
+:root{--bg:#fdf6ec;--card:#fff;--head:#2b2340;--acc:#ff7a45;--txt:#2b2340;--ok:#2bb673;--bad:#e5484d}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--txt)}
-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--ink);color:#fff}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--txt);transition:background .3s}
+header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--head);color:#fff}
 h1{font-size:19px;margin:0}
+#thBtn{font-size:20px;background:none;border:0;margin-right:6px}
 #tsBtn{font:800 18px Nunito;background:var(--acc);color:#fff;border:0;border-radius:12px;padding:6px 14px;line-height:1}
 #tsBtn small{display:block;font-size:10px;font-weight:600}
-#thBtn{font-size:20px;background:none;border:0;margin-right:8px}
-#thPanel{display:none;flex-wrap:wrap;gap:8px;padding:10px 14px;background:#fff;border-bottom:2px solid #eee}
-#thPanel.open{display:flex}
-#thPanel button{border:3px solid #fff;border-radius:12px;padding:8px 10px;font:800 12px Nunito;color:#fff;box-shadow:0 0 0 1px #ccc}
-#thPanel button.on{box-shadow:0 0 0 3px #222}
-#tsPanel{display:none;flex-wrap:wrap;gap:8px;padding:10px 14px;background:#fff;border-bottom:2px solid #eee}
-#tsPanel.open{display:flex}
-#tsPanel button{font:800 17px Nunito;border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 12px}
-#tsPanel button.on{background:var(--ink);color:#fff}
+.panel{display:none;flex-wrap:wrap;gap:8px;padding:10px 14px;background:var(--card);border-bottom:3px solid var(--head)}
+.panel.open{display:flex}
+#tsPanel button{font:800 17px Nunito;border:2px solid var(--txt);background:var(--card);color:var(--txt);border-radius:10px;padding:6px 12px}
+#tsPanel button.on{background:var(--head);color:#fff;border-color:var(--head)}
+#thPanel button{border:0;border-radius:12px;padding:0;width:96px;overflow:hidden;font:800 11px Nunito;box-shadow:0 0 0 2px #0002}
+#thPanel button i{display:flex;height:26px}#thPanel button i b{flex:1}
+#thPanel button span{display:block;padding:4px 2px}
+#thPanel button.on{box-shadow:0 0 0 4px var(--acc)}
+nav{display:flex;gap:8px;padding:10px 14px 0;flex-wrap:wrap}
+nav button,.tools button{font:800 15px Nunito;border:0;border-radius:12px;padding:10px 14px;background:var(--head);color:#fff}
+nav button.on{background:var(--acc)}
 .top{display:flex;align-items:center;gap:14px;padding:12px 14px;flex-wrap:wrap}
-#pie{width:150px;height:150px;flex:none}
+#pie{width:130px;height:130px;flex:none}
 #info{flex:1;min-width:160px}
 #info .big{font-size:20px;font-weight:800}
 #msg{min-height:24px;font-weight:800;margin-top:6px}
 #msg.bad{color:var(--bad)} #msg.ok{color:var(--ok)}
-#staff{display:flex;flex-wrap:wrap;padding:0 8px;gap:0}
+#staff{display:flex;flex-wrap:wrap;padding:0 8px}
 .bar{flex:1 1 300px;max-width:520px;min-width:260px;background:var(--card);border-radius:10px;margin:4px;border:3px solid transparent;touch-action:manipulation}
-.bar.act{border-color:var(--acc)} .bar.full{background:#eafaf1} .bar.over{background:#fdecec}
+.bar.act{border-color:var(--acc)} .bar.full{border-color:var(--ok)} .bar.over{border-color:var(--bad)}
+.bar.act.full{box-shadow:0 0 0 3px var(--acc)}
 .bar svg{width:100%;display:block;cursor:pointer}
-.hint{padding:4px 14px;font-size:14px;opacity:.75}
+.hint{padding:4px 14px;font-size:14px;opacity:.8}
 .pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px;padding:8px 14px}
-.pal button{background:#fff;border:2px solid #ddd;border-radius:12px;padding:4px 2px;font:600 11px Nunito;color:var(--ink)}
-.pal button.on{border-color:var(--acc);background:#fff1ea;box-shadow:0 0 0 2px var(--acc)}
+.pal button{background:var(--card);border:2px solid #0002;border-radius:12px;padding:4px 2px;font:600 11px Nunito;color:var(--txt)}
+.pal button.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
 .pal svg{width:40px;height:52px;display:block;margin:0 auto}
 h3{margin:10px 14px 0;font-size:15px}
 .tools{display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px}
-.tools button{font:800 15px Nunito;border:0;border-radius:12px;padding:10px 14px;background:var(--ink);color:#fff}
 #dotBtn.on{background:var(--acc)}
+.box{display:none;margin:8px 14px;padding:10px;border-radius:14px;background:var(--card);border:3px solid var(--acc)}
+.box.on{display:block}
+.pl{display:flex;gap:8px}
+.pl>div{flex:1;border-radius:12px;padding:8px;text-align:center;border:3px solid #0001}
+.pl>div.turn{border-color:var(--acc)}
+.pl input{width:100%;font:800 15px Nunito;border:0;background:transparent;text-align:center;color:var(--txt)}
+.pl b{font-size:30px;display:block}
+.srow{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:8px;flex-wrap:wrap;font-size:13px}
+.srow button{font:800 13px Nunito;border:2px solid var(--txt);background:var(--card);color:var(--txt);border-radius:8px;padding:4px 10px}
+.srow button.on{background:var(--head);color:#fff;border-color:var(--head)}
+.cent{text-align:center;font-weight:800;margin-top:6px}
+.lv{display:flex;gap:6px;flex-wrap:wrap}
+.lv button{flex:1;font:800 13px Nunito;border:0;border-radius:10px;padding:8px 4px;color:#fff;opacity:.55}
+.lv button.on{opacity:1;box-shadow:0 0 0 3px var(--txt)}
+.nums{display:flex;gap:6px;margin:8px 0;flex-wrap:wrap}
+.nums button{font:800 15px Nunito;width:46px;height:40px;border-radius:10px;border:2px solid var(--txt);background:var(--card);color:var(--txt)}
+.nums button.on{background:var(--head);color:#fff;border-color:var(--head)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chips span{font:800 13px Nunito;padding:5px 9px;border-radius:20px;border:2px solid var(--txt)}
+.chips span.ok{background:var(--ok);border-color:var(--ok);color:#fff}
 .shake{animation:sh .35s}
 @keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 footer{text-align:center;font-size:12px;opacity:.6;padding:16px}
@@ -48,8 +71,26 @@ footer{text-align:center;font-size:12px;opacity:.6;padding:16px}
 </head>
 <body>
 <header><h1>🎵 Riempi la Battuta</h1><div><button id="thBtn">🎨</button><button id="tsBtn">4/4<small>tempo</small></button></div></header>
-<div id="thPanel"></div>
-<div id="tsPanel"></div>
+<div class="panel" id="thPanel"></div>
+<div class="panel" id="tsPanel"></div>
+<nav>
+  <button id="exBtn">📚 Esercizi</button>
+  <button id="sfBtn">⚔️ Sfida a due</button>
+  <button id="colBtn">🌈 Note colorate</button>
+</nav>
+<div class="box" id="exBox">
+  <div class="lv" id="lvRow"></div>
+  <div class="nums" id="numRow"></div>
+  <div id="exTitle" style="font-weight:800"></div>
+  <div class="srow" id="songTools" style="justify-content:flex-start"><button id="songPlay">▶ Ascolta il motivo</button><button id="helpBtn"></button><span style="font-size:13px;opacity:.8">Copia il motivo nota per nota!</span></div>
+  <div id="reqLine" style="font-size:13px;opacity:.8">Riempi tutte le battute usando ALMENO queste figure:</div>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="box" id="sfida">
+  <div class="pl"><div id="p0"><input id="n0"><b id="s0">0</b></div><div id="p1"><input id="n1"><b id="s1">0</b></div></div>
+  <div class="srow">Vince chi arriva a: <button data-t="3">3</button><button data-t="5">5</button><button data-t="10">10</button> <button id="sNew">↺ Nuova sfida</button></div>
+  <div class="cent" id="sMsg"></div>
+</div>
 <div class="top">
   <svg id="pie" viewBox="0 0 160 160"></svg>
   <div id="info"><div class="big" id="barLbl"></div><div id="rest"></div><div id="msg"></div></div>
@@ -69,18 +110,62 @@ footer{text-align:center;font-size:12px;opacity:.6;padding:16px}
 <footer>Copyright © Ignazio Paolicelli</footer>
 <script>
 const FIG=[[32,'Semibreve'],[16,'Minima'],[8,'Semiminima'],[4,'Croma'],[2,'Semicroma']];
+const FN={32:'Semibreve',16:'Minima',8:'Semiminima',4:'Croma',2:'Semicroma'};
 const TS=[[2,4],[3,4],[4,4],[5,4],[2,2],[3,8],[6,8],[9,8],[12,8]];
 const NAMES=['Do','Re','Mi','Fa','Sol','La','Si'],SEMI=[0,2,4,5,7,9,11];
+const PCOL=['#e53935','#fb8c00','#f2b400','#43a047','#00acc1','#1e63d6','#8e24aa'];
 const COL=['#ff7a45','#4c8dff','#2bb673','#f5b700','#b36bff','#ff4f8b','#00b8c4','#8a6d3b'];
-let S={num:4,den:4,bars:[[],[],[],[]],act:0,sel:{b:8,r:false},dot:false};
-try{const s=JSON.parse(localStorage.getItem('riempiBattuta'));if(s&&s.bars)S=s}catch(e){}
-const save=()=>{try{localStorage.setItem('riempiBattuta',JSON.stringify(S))}catch(e){}};
+const RESTCOL='#9aa0a6';
+// [sfondo, riquadri, barra, accento, testo, scuro?]
+const TH={
+'Classico':['#fdf6ec','#ffffff','#2b2340','#ff7a45','#2b2340'],
+'Azzurro cielo':['#dff1ff','#ffffff','#1e88e5','#ff9800','#0d3c61'],
+'Celeste':['#e3f8ff','#ffffff','#29b6f6','#0277bd','#01579b'],
+'Azzurro polvere':['#e4edf5','#ffffff','#6b8fb3','#e57373','#2c3e50'],
+'Carta da zucchero':['#dfe8f6','#ffffff','#7da0ca','#2f4f86','#1d2f4f'],
+'Turchese':['#dcf7f5','#ffffff','#00a8a8','#ff6f61','#064e4e'],
+'Blu royal':['#e3e8ff','#ffffff','#2741c9','#ffb300','#14215f'],
+'Blu navy':['#e6eaf2','#ffffff','#14213d','#fca311','#14213d'],
+'Verde menta':['#e0f7ea','#ffffff','#2e9e5b','#ff7043','#164a2c'],
+'Giallo sole':['#fff6cc','#ffffff','#e0a800','#e53935','#4a3800'],
+'Rosa':['#ffe6f0','#ffffff','#d63384','#7b2cbf','#4a1030'],
+'Lavanda':['#eee6ff','#ffffff','#7c4dff','#00bfa5','#2e1a66'],
+'Pesca':['#ffe9dc','#ffffff','#ff8a5c','#3f72af','#4a2414'],
+'Blu notte':['#0b1530','#16244d','#2741c9','#4fc3f7','#e3ecff'],
+'Grafite azzurra':['#1d2730','#2a3844','#0e6aa0','#29b6f6','#e0f2ff'],
+'Scuro':['#17171c','#24242c','#3a3a55','#ff7a45','#eeeeee']};
+const EX={
+FACILE:[['4/4',2,{32:1,16:2}],['4/4',2,{16:2,8:4}],['3/4',2,{16:2,8:2}],['2/4',3,{16:1,8:2,'16r':1}],['4/4',2,{16:1,8:3,'8r':1,'16r':1}],['3/4',3,{16:2,8:3,'8r':1}]],
+MEDIO:[['4/4',2,{'16.':1,4:2,8:2}],['3/4',2,{'16.':1,4:2,'8r':1,8:1}],['2/4',3,{'8.':2,4:2,'8r':1}],['4/4',2,{'8.':2,4:3,'4r':1,16:1}],['2/2',2,{32:1,'16.':1,4:2}],['3/4',2,{'8.':2,4:2,'16r':1}]],
+DIFFICILE:[['6/8',2,{'8.':2,4:3}],['4/4',2,{2:5,'4.':1,8:2,'4r':1}],['3/8',4,{'4.':2,2:4,'4r':1,8:1}],['6/8',2,{'16.':1,4:2,2:2,'4r':1}],['3/4',2,{'4.':1,2:3,'8r':1,4:2}],['6/8',3,{'8.':2,'8.r':1,4:3,2:2}]],
+ESPERTO:[['12/8',1,{'8.':1,'8.r':1,4:2,2:4,'4.':1}],['9/8',2,{'16.':1,'4r':1,2:3,'4.':1,'8.':1}],['5/4',2,{32:1,'16.':1,'4.r':1,2:2,'2.':2}],['2/2',2,{2:8,'16r':1,'4.':2,'8.':1}],['12/8',2,{'16.':1,'16.r':1,'8.':1,4:3,2:4,'2.':2}],['9/8',3,{'8.r':1,'4.':3,2:6,'16.':1,4:2}]]};
+const LVCOL={FACILE:'#2bb673',MEDIO:'#f29900',DIFFICILE:'#e5484d',ESPERTO:'#7c4dff',CANZONCINE:'#1e88e5'};
+const CANZ=[["Fra Martino", "4/4", "c4 d4 e4 c4|c4 d4 e4 c4|e4 f4 g2|e4 f4 g2"], ["Brilla brilla la stellina", "4/4", "c4 c4 g4 g4|a4 a4 g2|f4 f4 e4 e4|d4 d4 c2"], ["Inno alla gioia (Beethoven)", "4/4", "e4 e4 f4 g4|g4 f4 e4 d4|c4 c4 d4 e4|e4. d8 d2"], ["Mary had a little lamb", "4/4", "e4. d8 c4 d4|e4 e4 e2|d4 d4 d2|e4 g4 g2"], ["Jingle Bells", "4/4", "e4 e4 e2|e4 e4 e2|e4 g4 c4. d8|e1"], ["Old MacDonald", "4/4", "g4 g4 g4 d4|e4 e4 d2|b4 b4 a4 a4|g2 r2"], ["London Bridge", "4/4", "g4. a8 g4 f4|e4 f4 g2|d4 e4 f2|e4 f4 g2"], ["Au clair de la lune", "4/4", "c4 c4 c4 d4|e2 d2|c4 e4 d4 d4|c1"], ["Row row row your boat", "6/8", "c4. c4.|c4 d8 e4.|e4 d8 e4 f8|g2."], ["Hot cross buns", "4/4", "e4 d4 c2|e4 d4 c2|c8 c8 c8 c8 d8 d8 d8 d8|e4 d4 c2"], ["Ninna nanna (Brahms)", "3/4", "e8 e8 g2|e8 e8 g2|e8 g8 C4 b4|a2 g4"], ["Sur le pont d'Avignon", "2/4", "c4 c4|c4 r4|d4 d4|d4 r4|e8 f8 g8 C8|b8 g8 r4"], ["Lightly row", "4/4", "g4 e4 e2|f4 d4 d2|c4 d4 e4 f4|g4 g4 g2"], ["Alle meine Entchen", "4/4", "c4 d4 e4 f4|g2 g2|a4 a4 a4 a4|g1"], ["Cucù (Kuckuck)", "3/4", "G2 E4|G2 E4|D4 C4 D4|C2 r4"], ["When the Saints", "4/4", "r4 c4 e4 f4|g1|r4 c4 e4 f4|g1"], ["Yankee Doodle", "2/4", "c8 c8 d8 e8|c8 e8 d4|c8 c8 d8 e8|c4 b4"], ["Pop goes the weasel", "6/8", "c4 c8 d4 d8|e8 g8 e8 c4."], ["La donna è mobile (Verdi)", "3/8", "e8 e8 e8|g8. fs d8|d8 d8 d8|f8. es c8"], ["Minuetto in Sol (Petzold)", "3/4", "g4 c8 d8 e8 f8|g4 c4 c4|a4 f8 g8 a8 b8|C4 c4 c4"], ["Piccola serenata notturna (Mozart)", "4/4", "C4 r8 g8 C4 r8 g8|C8 g8 C8 E8 G4 r4"], ["Il mattino (Grieg)", "6/8", "g8 e8 d8 c8 d8 e8|g8 e8 d8 c8 d8 e8|d8 e8 g8 e8 g8 a8|e8 g8 e8 d4."], ["Can-can (Offenbach)", "2/4", "c4 d8 f8|e8 d8 g8 g8|g8 a8 e8 g8|f8 a8 a4"], ["Bingo", "4/4", "g4 c4 c4 g4|a4 a4 g4 g4|c4 c4 d4 d4|e2 c4 r4"], ["Campane di Westminster", "3/4", "b4 g4 a4|d2.|d4 a4 b4|g2."], ["Skip to my Lou", "2/4", "e8 e8 c8 c8|e8 e8 g4|d8 d8 b8 b8|d8 d8 f4"], ["This old man", "4/4", "g4 e4 g2|g4 e4 g2|a4 g4 f4 e4|d4 e4 f2"], ["Largo dal Nuovo Mondo (Dvořák)", "4/4", "e4. g8 g2|e4. d8 c2|d4 e4 g4 e4|d1"], ["Sonata facile (Mozart)", "4/4", "C2 E4 G4|b4. C8 D8 C8 C4"], ["Sul bel Danubio blu (Strauss)", "3/4", "c4 c4 e4|g4 g2|G4 G2|E4 E2"], ["Astro del ciel", "6/8", "g4. a8 g4|e2.|g4. a8 g4|e2.|D2 D4|b2.|C2 C4|g2."], ["Deck the halls", "4/4", "G4. F8 E4 D4|C4 D4 E4 C4|D8 E8 F8 D8 E4. D8|C4 b4 C2"], ["We wish you a merry Christmas", "3/4", "C4 C8 D8 C8 b8|a4 a4 a4|D4 D8 E8 D8 C8|b4 g4 g4"], ["Joy to the world", "2/4", "C4 b8. as|g4. f8|e4 d4|c4. g8"]];
+const PL={};'cdefgab'.split('').forEach((c,i)=>PL[c]=i-2);'CDEFGA'.split('').forEach((c,i)=>PL[c]=i+5);
+const DU={'1':32,'2':16,'4':8,'8':4,'s':2};
+function parseSong(m){return m.split('|').map(b=>b.trim().split(/\s+/).map(t=>{const g=t.match(/^([a-gA-Gr])([1248s])(\.?)$/),dot=!!g[3],r=g[1]==='r';return{b:DU[g[2]],d:DU[g[2]]*(dot?1.5:1),dot,r,p:r?4:PL[g[1]]}}))}
+const isSong=()=>E.on&&E.lv==='CANZONCINE';
+const exList=lv=>lv==='CANZONCINE'?CANZ:EX[lv];
+let TGT=[];
+
+let S={num:4,den:4,bars:[[],[],[],[]],act:0,sel:{b:8,r:false},dot:false,theme:'Classico',pc:true};
+let SF={on:false,sc:[0,0],t:0,tg:5,names:['Giocatore 1','Giocatore 2'],end:false};
+let E={on:false,lv:'FACILE',i:0,done:{},ok:false,help:true};
+const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+S=Object.assign(S,ld('rb2S')||{});SF=Object.assign(SF,ld('rb2F')||{});E=Object.assign(E,ld('rb2E')||{});
+const save=()=>{try{localStorage.setItem('rb2S',JSON.stringify(S));localStorage.setItem('rb2F',JSON.stringify(SF));localStorage.setItem('rb2E',JSON.stringify(E))}catch(e){}};
+const $=id=>document.getElementById(id);
 const cap=()=>S.num*32/S.den, tot=b=>b.reduce((a,n)=>a+n.d,0);
 const Y=p=>98-6*p;
-const $=id=>document.getElementById(id);
+const pn=p=>((p+2)%7+7)%7;
+let INK='#2b2340';
+const key=n=>n.b+(n.dot?'.':'')+(n.r?'r':'');
+const kname=k=>{const b=parseInt(k),dot=k.includes('.'),r=k.includes('r');return r?'Pausa di '+FN[b].toLowerCase()+(dot?' puntata':''):FN[b]+(dot?' puntata':'')};
+const ncol=(n,j)=>n.r?(S.pc?RESTCOL:INK):(S.pc?PCOL[pn(n.p)]:INK);
+const wcol=(n,j)=>n.r?RESTCOL:(S.pc?PCOL[pn(n.p)]:COL[j%COL.length]);
 
-function noteSVG(x,p,b,dot,rest,col='#2b2340'){
-  let s='',y=Y(p);
+function noteSVG(x,p,b,dot,rest,col){
+  col=col||INK;let s='',y=Y(p);
   if(rest){
     if(b==32)s=`<rect x="${x-8}" y="62" width="16" height="6" fill="${col}"/>`;
     else if(b==16)s=`<rect x="${x-8}" y="68" width="16" height="6" fill="${col}"/>`;
@@ -90,10 +175,10 @@ function noteSVG(x,p,b,dot,rest,col='#2b2340'){
     if(dot)s+=`<circle cx="${x+12}" cy="71" r="2.6" fill="${col}"/>`;
     return s;
   }
-  if(p<=-2)s+=`<line x1="${x-12}" x2="${x+12}" y1="110" y2="110" stroke="${col}" stroke-width="1.5"/>`;
-  if(p>=10)s+=`<line x1="${x-12}" x2="${x+12}" y1="38" y2="38" stroke="${col}" stroke-width="1.5"/>`;
+  if(p<=-2)s+=`<line x1="${x-12}" x2="${x+12}" y1="110" y2="110" stroke="${INK}" stroke-width="1.5"/>`;
+  if(p>=10)s+=`<line x1="${x-12}" x2="${x+12}" y1="38" y2="38" stroke="${INK}" stroke-width="1.5"/>`;
   const fill=b<=8;
-  s+=`<ellipse cx="${x}" cy="${y}" rx="7.5" ry="5.2" transform="rotate(-20 ${x} ${y})" fill="${fill?col:'#fff'}" stroke="${col}" stroke-width="${fill?1:2.2}"/>`;
+  s+=`<ellipse cx="${x}" cy="${y}" rx="7.5" ry="5.2" transform="rotate(-20 ${x} ${y})" fill="${fill?col:'none'}" stroke="${col}" stroke-width="${fill?1:2.4}"/>`;
   if(b<=16){const up=p<4,sx=up?x+6.6:x-6.6,sy=up?y-36:y+36;
     s+=`<line x1="${sx}" y1="${y}" x2="${sx}" y2="${sy}" stroke="${col}" stroke-width="1.8"/>`;
     const fl=b==4?1:b==2?2:0;
@@ -105,20 +190,37 @@ function noteSVG(x,p,b,dot,rest,col='#2b2340'){
   return s;
 }
 
+function arc(cx,cy,r,a0,a1){
+  if(a1-a0>=0.9999)return `M${cx},${cy-r} A${r},${r} 0 1 1 ${cx-0.01},${cy-r}Z`;
+  const p=a=>[cx+r*Math.sin(a*2*Math.PI),cy-r*Math.cos(a*2*Math.PI)],[x0,y0]=p(a0),[x1,y1]=p(a1);
+  return `M${cx},${cy} L${x0},${y0} A${r},${r} 0 ${a1-a0>.5?1:0} 1 ${x1},${y1}Z`;
+}
+function pieSVG(bar,cx,cy,r,nums){
+  const C=cap(),t=tot(bar),card=getComputedStyle(document.documentElement).getPropertyValue('--card').trim()||'#fff';
+  let s=`<circle cx="${cx}" cy="${cy}" r="${r+2}" fill="${card}" stroke="${INK}" stroke-width="${r>30?3:2}"/>`,off=0;
+  bar.forEach((n,j)=>{const a0=Math.min(off/C,1),a1=Math.min((off+n.d)/C,1);if(a1>a0)s+=`<path d="${arc(cx,cy,r,a0,a1)}" fill="${wcol(n,j)}"/>`;off+=n.d});
+  for(let k=0;k<S.num;k++){const a=k/S.num*2*Math.PI;s+=`<line x1="${cx}" y1="${cy}" x2="${cx+(r+2)*Math.sin(a)}" y2="${cy-(r+2)*Math.cos(a)}" stroke="${INK}" stroke-width="${r>30?2:1.2}"/>`;
+    if(nums){const m=(k+.5)/S.num*2*Math.PI;s+=`<text x="${cx+r*.8*Math.sin(m)}" y="${cy+4-r*.8*Math.cos(m)}" font-size="${S.num>9?10:13}" font-weight="800" text-anchor="middle" fill="${INK}" opacity=".55">${k+1}</text>`}}
+  if(t!==0&&t>=C)s+=`<circle cx="${cx}" cy="${cy}" r="${r+2}" fill="none" stroke="${t>C?'#e5484d':'#2bb673'}" stroke-width="${r>30?6:3.5}"/>`;
+  return s;
+}
+
 function renderStaff(){
   const C=cap(),el=$('staff');el.innerHTML='';
   S.bars.forEach((bar,i)=>{
     const first=i===0,lead=first?78:14,W=lead+270,t=tot(bar),den=Math.max(C,t);
-    let s=`<svg viewBox="0 0 ${W} 150" data-i="${i}">`;
-    for(let k=0;k<5;k++)s+=`<line x1="0" x2="${W}" y1="${50+12*k}" y2="${50+12*k}" stroke="#2b2340" stroke-width="1.3"/>`;
-    s+=`<line x1="${W-1}" x2="${W-1}" y1="50" y2="98" stroke="#2b2340" stroke-width="2"/>`;
-    if(first)s+=`<text x="2" y="104" font-family="Noto Music" font-size="72">𝄞</text><text x="58" y="72" font-size="26" font-weight="800" text-anchor="middle" font-family="Georgia,serif">${S.num}</text><text x="58" y="96" font-size="26" font-weight="800" text-anchor="middle" font-family="Georgia,serif">${S.den}</text>`;
-    // guide beats
-    for(let k=1;k<S.num;k++){const gx=lead+12+k/S.num*250;s+=`<line x1="${gx}" x2="${gx}" y1="44" y2="104" stroke="#ff7a45" stroke-opacity=".18" stroke-dasharray="3 3"/>`}
+    let s=`<svg viewBox="0 -46 ${W} 196">`;
+    const mx=lead+135;
+    s+=pieSVG(bar,mx,-22,19,false)+`<text x="${mx+30}" y="-17" font-size="13" font-weight="800" fill="${INK}">${i+1}</text>`;
+    for(let k=0;k<5;k++)s+=`<line x1="0" x2="${W}" y1="${50+12*k}" y2="${50+12*k}" stroke="${INK}" stroke-width="1.3"/>`;
+    s+=`<line x1="${W-1}" x2="${W-1}" y1="50" y2="98" stroke="${INK}" stroke-width="2"/>`;
+    if(first)s+=`<text x="2" y="104" font-family="Noto Music" font-size="72" fill="${INK}">𝄞</text><text x="58" y="72" font-size="26" font-weight="800" text-anchor="middle" font-family="Georgia,serif" fill="${INK}">${S.num}</text><text x="58" y="96" font-size="26" font-weight="800" text-anchor="middle" font-family="Georgia,serif" fill="${INK}">${S.den}</text>`;
+    for(let k=1;k<S.num;k++){const gx=lead+12+k/S.num*250;s+=`<line x1="${gx}" x2="${gx}" y1="44" y2="104" stroke="${INK}" stroke-opacity=".15" stroke-dasharray="3 3"/>`}
+    if(isSong()&&E.help&&TGT[i]){let o=0;s+='<g opacity=".28">';TGT[i].forEach(n=>{const x=lead+20+o/C*250;s+=noteSVG(x,n.p,n.b,n.dot,n.r,INK);if(!n.r)s+=`<text x="${x}" y="128" font-size="10" text-anchor="middle" fill="${INK}">${NAMES[pn(n.p)]}</text>`;o+=n.d});s+='</g>'}
     let off=0;
-    bar.forEach((n,j)=>{const x=lead+20+off/den*250,col=off+n.d>C?'#e5484d':COL[j%COL.length];
+    bar.forEach((n,j)=>{const x=lead+20+off/den*250,col=off+n.d>C?'#e5484d':ncol(n,j);
       s+=noteSVG(x,n.p,n.b,n.dot,n.r,col);
-      if(!n.r){const d=n.p+2;s+=`<text x="${x}" y="140" font-size="11" text-anchor="middle" fill="${col}" font-weight="800">${NAMES[(d%7+7)%7]}</text>`}
+      if(!n.r)s+=`<text x="${x}" y="140" font-size="11" text-anchor="middle" fill="${col}" font-weight="800">${NAMES[pn(n.p)]}</text>`;
       off+=n.d});
     s+='</svg>';
     const div=document.createElement('div');
@@ -128,90 +230,126 @@ function renderStaff(){
     svg.addEventListener('pointerdown',e=>{
       const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
       const q=pt.matrixTransform(svg.getScreenCTM().inverse());
-      if(first&&q.x<74){toggleTS(true);return}
+      if(first&&q.x<74&&q.y>40){toggle('tsPanel',true);return}
       S.act=i;insert(i,Math.max(-2,Math.min(10,Math.round((98-q.y)/6))),div);
     });
   });
 }
-
-function arc(cx,cy,r,a0,a1){
-  if(a1-a0>=0.9999)return `M${cx},${cy-r} A${r},${r} 0 1 1 ${cx-0.01},${cy-r}Z`;
-  const p=a=>[cx+r*Math.sin(a*2*Math.PI),cy-r*Math.cos(a*2*Math.PI)],[x0,y0]=p(a0),[x1,y1]=p(a1);
-  return `M${cx},${cy} L${x0},${y0} A${r},${r} 0 ${a1-a0>.5?1:0} 1 ${x1},${y1}Z`;
-}
 function renderPie(){
-  const C=cap(),bar=S.bars[S.act]||[],t=tot(bar);let s=`<circle cx="80" cy="80" r="66" fill="#fff" stroke="#2b2340" stroke-width="3"/>`,off=0;
-  bar.forEach((n,j)=>{const a0=Math.min(off/C,1),a1=Math.min((off+n.d)/C,1);if(a1>a0)s+=`<path d="${arc(80,80,64,a0,a1)}" fill="${COL[j%COL.length]}"/>`;off+=n.d});
-  for(let k=0;k<S.num;k++){const a=k/S.num*2*Math.PI;s+=`<line x1="80" y1="80" x2="${80+66*Math.sin(a)}" y2="${80-66*Math.cos(a)}" stroke="#2b2340" stroke-width="2"/>`;
-    const m=(k+.5)/S.num*2*Math.PI;s+=`<text x="${80+52*Math.sin(m)}" y="${84-52*Math.cos(m)}" font-size="${S.num>9?10:13}" font-weight="800" text-anchor="middle" fill="#2b2340" opacity=".55">${k+1}</text>`}
-  if(t>C)s+=`<circle cx="80" cy="80" r="66" fill="none" stroke="#e5484d" stroke-width="6"/>`;
-  else if(t===C)s+=`<circle cx="80" cy="80" r="66" fill="none" stroke="#2bb673" stroke-width="6"/>`;
-  $('pie').innerHTML=s;
+  const C=cap(),bar=S.bars[S.act]||[],t=tot(bar);
+  $('pie').innerHTML=pieSVG(bar,80,80,64,true);
   $('barLbl').textContent=`Battuta ${S.act+1} di ${S.bars.length} · ${S.num}/${S.den}`;
   $('rest').textContent=t>=C?(t===C?'Piena! ✔':'Troppe note!'):'Manca: '+decomp(C-t);
 }
-function decomp(r){const o=[];for(const[v,n]of FIG)while(r>=v){o.push(n);r-=v}return o.join(' + ')}
-
+function decomp(r){const o=[];for(const[v,n]of FIG)while(r>=v){o.push(n);r-=v}if(r>0)o.push('punto');return o.join(' + ')}
 function msg(t,c){const m=$('msg');m.textContent=t;m.className=c||''}
+
 function insert(i,p,div){
+  if(SF.on&&SF.end){msg('Sfida finita! Premi Nuova sfida','bad');return}
   const C=cap(),bar=S.bars[i],d=S.sel.b*(S.dot?1.5:1);
   if(tot(bar)+d>C){div.classList.remove('shake');void div.offsetWidth;div.classList.add('shake');
-    msg(tot(bar)===C?'Battuta già piena! Passa alla prossima.':'Non ci sta! Manca solo: '+decomp(C-tot(bar)),'bad');renderPie();renderStaffAct();return}
+    msg(tot(bar)===C?'Battuta già piena! Passa alla prossima.':'Non ci sta! Manca solo: '+decomp(C-tot(bar)),'bad');
+    if(SF.on&&tot(bar)<C)sfErr();renderPie();render();return}
+  if(isSong()){const tg=TGT[i][bar.length];
+    if(tg&&(tg.b!==S.sel.b||tg.dot!==S.dot||tg.r!==S.sel.r||(!tg.r&&tg.p!==p))){
+      div.classList.remove('shake');void div.offsetWidth;div.classList.add('shake');
+      let h=tg.r!==S.sel.r?(tg.r?'Qui ci vuole una pausa!':'Qui ci vuole una nota, non una pausa!'):(tg.b!==S.sel.b||tg.dot!==S.dot)?'Figura sbagliata: guarda bene la durata'+(tg.dot?' (c\'è il punto!)':''):(tg.p>p?'Nota troppo bassa: sali!':'Nota troppo alta: scendi!');
+      if(!tg.r&&!S.sel.r&&tg.p!==p)tone(p,.25);msg('❌ '+h,'bad');return}}
   bar.push({b:S.sel.b,d,dot:S.dot,r:S.sel.r,p:S.sel.r?4:p});
   if(!S.sel.r)tone(p,0.35);
-  if(tot(bar)===C){msg('🎉 Battuta completa!','ok');if(i===S.bars.length-1)S.bars.push([]);S.act=i+1}
-  else msg(S.sel.r?'Pausa inserita':'Nota '+NAMES[((p+2)%7+7)%7],'');
+  if(tot(bar)===C){msg('🎉 Battuta completa!','ok');if(SF.on)sfOk();
+    if(i===S.bars.length-1){if(!E.on)S.bars.push([]),S.act=i+1}else S.act=i+1}
+  else msg(S.sel.r?'Pausa inserita':'Nota '+NAMES[pn(p)],'');
+  if(E.on)exCheck();
   save();render();
 }
-function renderStaffAct(){document.querySelectorAll('.bar').forEach((b,k)=>b.classList.toggle('act',k===S.act))}
 
 let AC;function ac(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}
 function freq(p){const d=p+2,o=Math.floor(d/7);return 440*Math.pow(2,(60+12*o+SEMI[(d%7+7)%7]-69)/12)}
 function tone(p,len,at){try{const a=ac(),t=at||a.currentTime,o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=freq(p);
   g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.35,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+Math.max(.15,len));o.connect(g).connect(a.destination);o.start(t);o.stop(t+len+.05)}catch(e){}}
+function fanfare(){[0,2,4,7].forEach((p,i)=>{try{tone(p,.3,ac().currentTime+i*.15)}catch(e){}})}
 
 function palette(){
   const mk=(el,r)=>{el.innerHTML='';FIG.forEach(([b,n])=>{const bt=document.createElement('button');
     bt.className=S.sel.b===b&&S.sel.r===r?'on':'';
-    bt.innerHTML=`<svg viewBox="${r?'-20 50 40 60':'-14 46 40 60'}">${noteSVG(r?0:-1,r?4:1,b,false,r)}</svg>${r?'Pausa di '+n.toLowerCase():n}`;
+    const c=S.pc?(r?RESTCOL:PCOL[[0,1,2,3,4][FIG.findIndex(f=>f[0]==b)]]):INK;
+    bt.innerHTML=`<svg viewBox="${r?'-20 50 40 60':'-14 46 40 60'}">${noteSVG(r?0:-1,r?4:1,b,S.dot,r,c)}</svg>${r?'Pausa di '+n.toLowerCase():n}${S.dot?' puntata':''}`;
     bt.onclick=()=>{S.sel={b,r};palette();ac();save()};el.appendChild(bt)})};
-  mk($('palN'),false);mk($('palR'),true);$('dotBtn').classList.toggle('on',S.dot);
+  mk($('palN'),false);mk($('palR'),true);$('dotBtn').classList.toggle('on',S.dot);$('colBtn').classList.toggle('on',S.pc);
 }
-function toggleTS(force){const p=$('tsPanel');p.classList.toggle('open',force===undefined?!p.classList.contains('open'):force)}
+function toggle(id,force){const p=$(id);p.classList.toggle('open',force===undefined?!p.classList.contains('open'):force)}
 function renderTS(){$('tsBtn').innerHTML=`${S.num}/${S.den}<small>tempo</small>`;const p=$('tsPanel');p.innerHTML='';
   TS.forEach(([n,d])=>{const b=document.createElement('button');b.textContent=n+'/'+d;b.className=n==S.num&&d==S.den?'on':'';
-    b.onclick=()=>{S.num=n;S.den=d;toggleTS(false);msg('Tempo cambiato in '+n+'/'+d,'');save();render()};p.appendChild(b)})}
-function render(){renderTS();renderStaff();renderPie();palette()}
+    b.onclick=()=>{if(E.on){E.on=false;exRender()}S.num=n;S.den=d;toggle('tsPanel',false);msg('Tempo cambiato in '+n+'/'+d,'');save();render()};p.appendChild(b)})}
+function render(){renderTS();renderStaff();renderPie();palette();if(E.on)exChips()}
 
-$('tsBtn').onclick=()=>toggleTS();
+/* ---- TEMI ---- */
+function applyTH(n){const t=TH[n]||TH.Classico,r=document.documentElement.style;
+  r.setProperty('--bg',t[0]);r.setProperty('--card',t[1]);r.setProperty('--head',t[2]);r.setProperty('--acc',t[3]);r.setProperty('--txt',t[4]);
+  INK=t[4];S.theme=n;save();
+  const p=$('thPanel');p.innerHTML='';
+  Object.keys(TH).forEach(k=>{const c=TH[k],b=document.createElement('button');b.className=k===n?'on':'';
+    b.innerHTML=`<i><b style="background:${c[2]}"></b><b style="background:${c[3]}"></b></i><span style="background:${c[0]};color:${c[4]}">${k}</span>`;
+    b.onclick=()=>applyTH(k);p.appendChild(b)});
+  render();}
+
+/* ---- SFIDA ---- */
+function sfRender(){$('sfida').classList.toggle('on',SF.on);$('sfBtn').classList.toggle('on',SF.on);
+  [0,1].forEach(k=>{$('s'+k).textContent=SF.sc[k];$('p'+k).classList.toggle('turn',SF.t===k&&!SF.end);if(document.activeElement!==$('n'+k))$('n'+k).value=SF.names[k]});
+  document.querySelectorAll('[data-t]').forEach(b=>b.classList.toggle('on',+b.dataset.t===SF.tg));
+  if(!SF.end)$('sMsg').textContent='Tocca a '+SF.names[SF.t]+': riempi la battuta!';save()}
+function sfOk(){const k=SF.t;SF.sc[k]++;
+  if(SF.sc[k]>=SF.tg){SF.end=true;$('sMsg').textContent='🏆 Ha vinto '+SF.names[k]+'! ('+SF.sc[0]+' a '+SF.sc[1]+')';fanfare()}
+  else{SF.t=1-k;setTimeout(()=>msg('+1 punto a '+SF.names[k]+'! Ora tocca a '+SF.names[SF.t],'ok'),10)}
+  sfRender()}
+function sfErr(){if(SF.end)return;const k=SF.t;S.bars[S.act]=[];SF.t=1-k;
+  setTimeout(()=>{msg('❌ Sbagliato! Battuta svuotata, tocca a '+SF.names[SF.t],'bad');render()},10);sfRender()}
+function sfNew(){SF.sc=[0,0];SF.t=0;SF.end=false;S.bars=[[],[],[],[]];S.act=0;save();msg('Nuova sfida!','');render();sfRender()}
+
+/* ---- ESERCIZI ---- */
+function exData(){return exList(E.lv)[E.i]}
+function exStart(lv,i){E.on=true;E.lv=lv;E.i=i;E.ok=false;let [ts,nb]=exData();if(lv==='CANZONCINE'){const c=exData();ts=c[1];TGT=parseSong(c[2]);nb=TGT.length}const [n,d]=ts.split('/').map(Number);
+  S.num=n;S.den=d;S.bars=Array.from({length:nb},()=>[]);S.act=0;
+  if(SF.on){SF.on=false;sfRender()}
+  msg('Esercizio '+lv+' '+(i+1)+': via!','');save();exRender();render()}
+function exCounts(){const c={};S.bars.forEach(b=>b.forEach(n=>{const k=key(n);c[k]=(c[k]||0)+1}));return c}
+function exChips(){$('reqLine').style.display=isSong()?'none':'';$('songTools').style.display=isSong()?'flex':'none';$('helpBtn').textContent=E.help?'👁 Aiuto: SÌ':'🙈 Aiuto: NO';if(isSong()){$('chips').innerHTML='';return}
+  const req=exData()[2],c=exCounts();
+  $('chips').innerHTML=Object.entries(req).map(([k,v])=>{const h=Math.min(c[k]||0,v);return `<span class="${h>=v?'ok':''}">${h>=v?'✓ ':''}${h}/${v} ${kname(k)}</span>`}).join('')}
+function exCheck(){const C=cap();if(!S.bars.every(b=>tot(b)===C))return;
+  if(isSong()){setTimeout(()=>{E.ok=true;E.done[E.lv+E.i]=1;msg('⭐ Motivo completato! Ascoltalo con ▶','ok');fanfare();save();exRender()},20);return}
+  const req=exData()[2],c=exCounts(),miss=Object.entries(req).filter(([k,v])=>(c[k]||0)<v);
+  setTimeout(()=>{if(!miss.length){E.ok=true;E.done[E.lv+E.i]=1;msg('⭐ Esercizio superato! Bravissimo!','ok');fanfare();save();exRender()}
+    else msg('Battute piene, ma mancano: '+miss.map(([k,v])=>(v-(c[k]||0))+' '+kname(k)).join(', ')+'. Premi Annulla e riprova!','bad')},20)}
+function exRender(){$('exBox').classList.toggle('on',E.on);$('exBtn').classList.toggle('on',E.on);if(!E.on)return;
+  $('lvRow').innerHTML='';[...Object.keys(EX),'CANZONCINE'].forEach(lv=>{const b=document.createElement('button');b.textContent=lv==='CANZONCINE'?'🎶 CANZONCINE':lv;b.style.background=LVCOL[lv];
+    b.className=lv===E.lv?'on':'';b.onclick=()=>exStart(lv,0);$('lvRow').appendChild(b)});
+  $('numRow').innerHTML='';exList(E.lv).forEach((_,i)=>{const b=document.createElement('button');b.textContent=(isSong()?(i+1)+'. '+CANZ[i][0]:(i+1))+(E.done[E.lv+i]?' ⭐':'');if(isSong()){b.style.width='auto';b.style.padding='0 10px';b.style.fontSize='13px'}
+    b.className=i===E.i?'on':'';b.onclick=()=>exStart(E.lv,i);$('numRow').appendChild(b)});
+  const xd=exData(),ts=isSong()?xd[1]:xd[0],nb=isSong()?TGT.length:xd[1];$('exTitle').innerHTML=`<span style="color:${LVCOL[E.lv]}">${isSong()?'🎶 '+xd[0]:E.lv+' '+(E.i+1)}</span> · tempo ${ts} · ${nb} battut${nb>1?'e':'a'}`+(E.ok?' · ⭐ Superato!':'');
+  exChips()}
+
+/* ---- PULSANTI ---- */
+$('tsBtn').onclick=()=>toggle('tsPanel');
+$('thBtn').onclick=()=>toggle('thPanel');
+$('colBtn').onclick=()=>{S.pc=!S.pc;save();render()};
+$('exBtn').onclick=()=>{if(E.on){E.on=false;save();exRender()}else exStart(E.lv,E.i)};
+$('sfBtn').onclick=()=>{SF.on=!SF.on;if(SF.on){if(E.on){E.on=false;exRender()}sfNew()}else sfRender()};
+$('sNew').onclick=sfNew;
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{SF.tg=+b.dataset.t;sfRender()});
+[0,1].forEach(k=>$('n'+k).oninput=e=>{SF.names[k]=e.target.value||('Giocatore '+(k+1));save()});
 $('dotBtn').onclick=()=>{S.dot=!S.dot;palette();msg(S.dot?'Punto attivo: la figura vale una volta e mezza':'Punto tolto','');save()};
-$('undo').onclick=()=>{let i=S.act;if(!S.bars[i].length&&i>0)i--;S.act=i;S.bars[i].pop();msg('','');save();render()};
+$('undo').onclick=()=>{let i=S.act;if(!S.bars[i].length&&i>0)i--;S.act=i;S.bars[i].pop();E.ok=false;msg('','');save();render();if(E.on)exRender()};
 $('clrBar').onclick=()=>{S.bars[S.act]=[];msg('Battuta svuotata','');save();render()};
 $('addBar').onclick=()=>{S.bars.push([]);S.act=S.bars.length-1;save();render()};
-$('clrAll').onclick=()=>{S.bars=[[],[],[],[]];S.act=0;msg('Si ricomincia!','');save();render()};
+$('clrAll').onclick=()=>{if(E.on){exStart(E.lv,E.i);return}S.bars=[[],[],[],[]];S.act=0;msg('Si ricomincia!','');save();render()};
 $('play').onclick=()=>{const a=ac();let t=a.currentTime+.1;const u=0.6/8*(S.den==8?2:1);
   S.bars.forEach(b=>b.forEach(n=>{if(!n.r)tone(n.p,n.d*u*.9,t);t+=n.d*u}))};
-const TH={
-'Classico':['#fdf6ec','#2b2340','#ff7a45','#2b2340'],
-'Azzurro cielo':['#e6f4ff','#1e88e5','#ff9800','#0d3c61'],
-'Celeste':['#eefaff','#4fc3f7','#0277bd','#01579b'],
-'Azzurro polvere':['#eef3f8','#6b8fb3','#e57373','#2c3e50'],
-'Turchese':['#e8fbfa','#00a8a8','#ff6f61','#064e4e'],
-'Carta da zucchero':['#edf2fb','#7da0ca','#3a5a8c','#1d2f4f'],
-'Blu royal':['#eef1ff','#2741c9','#ffb300','#14215f'],
-'Blu navy':['#e9edf5','#14213d','#fca311','#14213d'],
-'Blu notte':['#0b1530','#1c2e6b','#4fc3f7','#e3ecff'],
-'Verde':['#eefaf0','#2e7d32','#ff7043','#1b3d1d'],
-'Rosa':['#fff0f5','#d63384','#7b2cbf','#4a1030'],
-'Scuro':['#1b1b22','#33334a','#ff7a45','#eeeeee']};
-function applyTH(n){const t=TH[n]||TH.Classico,r=document.documentElement.style;
- r.setProperty('--bg',t[0]);r.setProperty('--ink',t[1]);r.setProperty('--acc',t[2]);r.setProperty('--txt',t[3]);
- S.theme=n;save();const p=$('thPanel');p.innerHTML='';
- Object.keys(TH).forEach(k=>{const b=document.createElement('button');b.textContent=k;b.className=k===n?'on':'';
-  b.style.background=`linear-gradient(135deg,${TH[k][1]} 60%,${TH[k][2]})`;b.onclick=()=>applyTH(k);p.appendChild(b)})}
-$('thBtn').onclick=()=>$('thPanel').classList.toggle('open');
-applyTH(S.theme||'Classico');
-render();
+$('songPlay').onclick=()=>{const a=ac();let t=a.currentTime+.1;const u=0.6/8*(S.den==8?2:1);TGT.forEach(b=>b.forEach(n=>{if(!n.r)tone(n.p,n.d*u*.9,t);t+=n.d*u}))};
+$('helpBtn').onclick=()=>{E.help=!E.help;save();render()};
+if(E.lv==='CANZONCINE')TGT=parseSong(CANZ[E.i][2]);
+applyTH(S.theme);sfRender();exRender();
 </script>
 </body>
 </html>
