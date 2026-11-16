@@ -14,13 +14,16 @@ button:active{transform:scale(.95)}
 header{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--head);color:#fff;box-shadow:0 4px 18px #0002}
 h1{font-size:18px;margin:0;letter-spacing:.2px}
 header div{display:flex;gap:8px;align-items:center}
-#thBtn{font-size:18px;background:#ffffff22;border:0;border-radius:12px;width:42px;height:42px}
+#setBtn,#thBtn{font-size:18px;background:#ffffff22;border:0;border-radius:12px;width:42px;height:42px}
 #tsBtn{font:800 18px Nunito;background:var(--acc);color:#fff;border:0;border-radius:14px;padding:6px 14px;line-height:1;box-shadow:0 3px 10px #0003}
 #tsBtn small{display:block;font-size:9px;font-weight:700;opacity:.9;text-transform:uppercase;letter-spacing:.5px}
 .panel{display:none;flex-wrap:wrap;gap:8px;padding:12px 16px;background:var(--card);box-shadow:0 8px 20px #0001}
 .panel.open{display:flex}
 #tsPanel button{font:800 16px Nunito;border:0;background:var(--bg);color:var(--txt);border-radius:12px;padding:8px 14px}
 #tsPanel button.on{background:var(--acc);color:#fff}
+.setl{width:100%;font:900 13px Nunito;letter-spacing:.5px;opacity:.75}
+#setPanel button{font:800 15px Nunito;border:0;background:var(--bg);color:var(--txt);border-radius:12px;padding:10px 14px}
+#setPanel button.on{background:var(--acc);color:#fff}
 #thPanel button{border:0;border-radius:14px;padding:0;width:92px;overflow:hidden;font:800 11px Nunito;box-shadow:0 2px 8px #0002}
 #thPanel button i{display:flex;height:24px}#thPanel button i b{flex:1}
 #thPanel button span{display:block;padding:5px 2px}
@@ -37,12 +40,14 @@ nav button.on{background:var(--acc);color:#fff;box-shadow:0 4px 14px #0002}
 #msg.show{opacity:1}
 #msg.bad{background:var(--bad)} #msg.ok{background:var(--ok)}
 .hint{padding:2px 18px 6px;font-size:13px;opacity:.7}
-#staff{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;padding:0 12px}
-.bar{background:var(--card);border-radius:var(--r);border:2px solid transparent;box-shadow:0 2px 12px #0001;touch-action:manipulation;transition:border-color .2s,box-shadow .2s}
+#staff{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:4px 12px 12px;scrollbar-width:thin}
+.bar{flex:0 0 var(--bw,min(86vw,440px));scroll-snap-align:center;background:var(--card);border-radius:var(--r);border:2px solid transparent;box-shadow:0 2px 12px #0001;touch-action:pan-x pan-y;transition:border-color .2s,box-shadow .2s}
+#staff{touch-action:pan-x pan-y}
+.zoomtip{font-size:12px;opacity:.6;padding:0 18px}
 .bar.act{border-color:var(--acc);box-shadow:0 6px 20px #0002}
 .bar.full{border-color:var(--ok)} .bar.over{border-color:var(--bad)}
 .bar svg{width:100%;display:block;cursor:pointer}
-#palBox{grid-column:1/-1;background:var(--card);border-radius:var(--r);padding:10px;box-shadow:0 6px 20px #0002;border:2px solid var(--acc)}
+#palBox{margin:0 12px;background:var(--card);border-radius:var(--r);padding:10px;box-shadow:0 6px 20px #0002;border:2px solid var(--acc)}
 .pal{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:3px 0}
 .pal button{background:var(--bg);border:2px solid transparent;border-radius:12px;padding:3px 1px;font:700 9.5px Nunito;color:var(--txt);line-height:1.1}
 .pal button.on{border-color:var(--acc);background:var(--card);box-shadow:0 3px 10px #0002}
@@ -76,37 +81,81 @@ nav button.on{background:var(--acc);color:#fff;box-shadow:0 4px 14px #0002}
 .ctag{display:inline-block;font:900 12px Nunito;letter-spacing:1px;background:var(--acc);color:#fff;border-radius:8px;padding:3px 9px;margin-bottom:6px}
 #reqLine{font-size:17px;font-weight:800;line-height:1.3}
 .consegna .chips span{background:var(--card);font-size:14px;padding:7px 12px;box-shadow:0 1px 4px #0001}
+.sel{font:800 14px Nunito;padding:8px;border-radius:10px;border:0;background:var(--bg);color:var(--txt);max-width:62vw}
+.sub2{font-size:13px;opacity:.7;margin-top:8px;text-align:center}
+.pts{font:900 15px Nunito;background:var(--acc);color:#fff;border-radius:10px;padding:6px 12px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .chips span{font:800 12px Nunito;padding:6px 10px;border-radius:20px;background:var(--bg)}
 .chips span.ok{background:var(--ok);color:#fff}
 .shake{animation:sh .35s}
 @keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 footer{text-align:center;font-size:12px;opacity:.55;padding:10px}
+
+/* --- gerarchia --- */
+.box{padding:12px 14px}
+.lv{gap:6px;margin:0}
+.lv button{font:800 13px Nunito;padding:7px 12px;border-radius:10px}
+.sec{font:900 11px Nunito;letter-spacing:.8px;margin:10px 0 0;opacity:.6}
+.sec small{font-weight:700}
+.nums{flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:6px 0 2px;padding:4px 2px 6px;scrollbar-width:none}
+.nums.songs{flex-wrap:wrap;overflow:visible}
+.nums button{flex:none;width:36px;height:36px;font-size:14px;border-radius:10px}
+.consegna{margin-top:10px;padding:14px;border-radius:16px;background:var(--bg);border-left:6px solid var(--acc)}
+.chead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.ctag{margin:0}
+#exTitle{flex:1;font-size:13px;font-weight:700;opacity:.75;min-width:120px}
+.pts{font:900 14px Nunito;padding:4px 10px;border-radius:10px}
+#reqLine{font-size:19px;font-weight:800;line-height:1.3}
+.consegna .chips span{font-size:15px}
+.prow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.prow button{border:0;border-radius:12px;padding:10px 12px;font:800 14px Nunito;background:var(--card);color:var(--txt);box-shadow:0 1px 4px #0001}
+.prow button.big{flex:1;background:var(--acc);color:#fff;font-size:16px;padding:12px}
+.prow button.on{background:var(--head);color:#fff}
+.trow{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center}
+.trow button{font:800 12px Nunito;padding:6px 11px;border-radius:20px;border:0;background:var(--card);color:var(--txt)}
+.trow button.on{background:var(--acc);color:#fff}
+#songHint{display:none}
+#reqLine .sub{font-size:14px;font-weight:600;opacity:.75;margin-top:4px}
+.zoomtip{font-size:12px;opacity:.55;padding:6px 18px 2px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tools button{font-size:13px;padding:9px 12px}
+nav button{padding:10px;font-size:14px}
 </style>
 </head>
 <body>
-<header><h1>🎵 Riempi la Battuta</h1><div><button id="thBtn">🎨</button><button id="tsBtn">4/4<small>tempo</small></button></div></header>
+<header><h1>🎵 Riempi la Battuta</h1><div><button id="setBtn">⚙️</button><button id="thBtn">🎨</button><button id="tsBtn">4/4<small>tempo</small></button></div></header>
+<div class="panel" id="setPanel"></div>
 <div class="panel" id="thPanel"></div>
 <div class="panel" id="tsPanel"></div>
 <nav>
-  <button id="exBtn">📚 Esercizi</button>
+  <button id="exBtn">📚 Esercizi – giocatore singolo</button>
   <button id="sfBtn">⚔️ Sfida a due</button>
 </nav>
 <div class="box" id="exBox">
   <div class="lv" id="lvRow"></div>
-  <div class="sec" id="exHead">ESERCITAZIONI <small>(difficoltà crescente)</small></div>
+  <div class="sec" id="exHead">ESERCITAZIONI <small>· difficoltà crescente</small></div>
   <div class="nums" id="numRow"></div>
-  <div id="exTitle" style="font-weight:800"></div>
-  <div class="srow" id="songTools" style="justify-content:flex-start"><button id="songPlay">▶ Ascolta il motivo</button><button id="myPlay">🎧 Ascolta quello che hai scritto</button><button id="slowBtn">🐢 Lento</button><button id="helpBtn"></button><button id="ckBtn">✔ Correggi</button><button id="solBtn"></button><span id="songHint" style="font-size:13px;opacity:.8"></span></div>
-  <div class="consegna"><div class="ctag">📋 CONSEGNA</div><div id="reqLine"></div><div class="chips" id="chips"></div></div>
+  <div class="consegna">
+    <div class="chead"><span class="ctag">📋 CONSEGNA</span><span id="exTitle"></span><span id="ptsLbl" class="pts"></span></div>
+    <div id="reqLine"></div>
+    <div class="chips" id="chips"></div>
+    <div id="songTools">
+      <div class="prow"><button id="songPlay" class="big">▶ Ascolta il motivo</button><button id="slowBtn">🐢 Lento</button><button id="myPlay">🎧 Ascolta ciò che ho scritto io</button></div>
+      <div class="trow"><button id="helpBtn"></button><button id="expBtn"></button><button id="ckBtn">✔ Correggi</button><button id="solBtn"></button><span id="songHint"></span></div>
+    </div>
+  </div>
 </div>
 <div class="box" id="sfida">
   <div class="pl"><div id="p0"><input id="n0"><b id="s0">0</b></div><div id="p1"><input id="n1"><b id="s1">0</b></div></div>
-  <div class="srow">Vince chi arriva a: <button data-t="3">3</button><button data-t="5">5</button><button data-t="10">10</button> <button id="sNew">↺ Nuova sfida</button></div>
+  <div class="lv" style="margin-top:10px"><button id="sfM0">🎼 Battute libere</button><button id="sfM1">🎶 Canzoncine</button></div>
+  <div id="sfFree" class="srow">Vince chi arriva a: <button data-t="3">3</button><button data-t="5">5</button><button data-t="10">10</button></div>
+  <div id="sfCanz"><div class="srow" style="justify-content:flex-start"><select id="sfSong" class="sel"></select><button id="sfRnd">🎲 A caso</button></div>
+    <div class="prow"><button id="sfPlay" class="big">▶ Ascolta il motivo</button><button id="sfMy">🎧 Ascolta ciò che abbiamo scritto</button></div>
+    <div class="sub2">Una nota a testa: nota giusta = +1 punto, nota sbagliata = 0 punti e il turno passa all'altro.</div></div>
+  <div class="srow"><button id="sNew">↺ Nuova sfida</button></div>
   <div class="cent" id="sMsg"></div>
 </div>
 <div id="msg"></div><span id="barLbl" hidden></span><span id="rest" hidden></span>
-<div class="hint">1) Scegli una figura qui sotto · 2) Tocca il pentagramma all'altezza della nota che vuoi</div>
+<div class="zoomtip">🤏 Zoom con due dita <button id="zReset" style="border:0;background:var(--card);color:var(--txt);border-radius:8px;padding:3px 8px;font:800 12px Nunito">↺ normale</button></div>
 <div id="staff"></div>
 <div id="palBox"><div class="pal" id="palN"></div><div class="pal" id="palR"></div>
 <div class="tools mini">
@@ -152,7 +201,7 @@ MEDIO:[['4/4',2,{'16.':1,4:2,8:2}],['3/4',2,{'16.':1,4:2,'8r':1,8:1}],['2/4',3,{
 DIFFICILE:[['6/8',2,{'8.':2,4:3}],['4/4',2,{2:5,'4.':1,8:2,'4r':1}],['3/8',4,{'4.':2,2:4,'4r':1,8:1}],['6/8',2,{'16.':1,4:2,2:2,'4r':1}],['3/4',2,{'4.':1,2:3,'8r':1,4:2}],['6/8',3,{'8.':2,'8.r':1,4:3,2:2}]],
 ESPERTO:[['12/8',1,{'8.':1,'8.r':1,4:2,2:4,'4.':1}],['9/8',2,{'16.':1,'4r':1,2:3,'4.':1,'8.':1}],['5/4',2,{32:1,'16.':1,'4.r':1,2:2,'2.':2}],['2/2',2,{2:8,'16r':1,'4.':2,'8.':1}],['12/8',2,{'16.':1,'16.r':1,'8.':1,4:3,2:4,'2.':2}],['9/8',3,{'8.r':1,'4.':3,2:6,'16.':1,4:2}]]};
 const LVCOL={FACILE:'#2bb673',MEDIO:'#f29900',DIFFICILE:'#e5484d',ESPERTO:'#7c4dff',CANZONCINE:'#1e88e5',DETTATO:'#00897b'};
-const CANZ=[["Fra Martino", "4/4", "c4 d4 e4 c4|c4 d4 e4 c4|e4 f4 g2|e4 f4 g2"], ["Brilla brilla la stellina", "4/4", "c4 c4 g4 g4|a4 a4 g2|f4 f4 e4 e4|d4 d4 c2"], ["Inno alla gioia (Beethoven)", "4/4", "e4 e4 f4 g4|g4 f4 e4 d4|c4 c4 d4 e4|e4. d8 d2"], ["Mary had a little lamb", "4/4", "e4. d8 c4 d4|e4 e4 e2|d4 d4 d2|e4 g4 g2"], ["Jingle Bells", "4/4", "e4 e4 e2|e4 e4 e2|e4 g4 c4. d8|e1"], ["Old MacDonald", "4/4", "g4 g4 g4 d4|e4 e4 d2|b4 b4 a4 a4|g2 r2"], ["London Bridge", "4/4", "g4. a8 g4 f4|e4 f4 g2|d4 e4 f2|e4 f4 g2"], ["Au clair de la lune", "4/4", "c4 c4 c4 d4|e2 d2|c4 e4 d4 d4|c1"], ["Row row row your boat", "6/8", "c4. c4.|c4 d8 e4.|e4 d8 e4 f8|g2."], ["Hot cross buns", "4/4", "e4 d4 c2|e4 d4 c2|c8 c8 c8 c8 d8 d8 d8 d8|e4 d4 c2"], ["Ninna nanna (Brahms)", "3/4", "e8 e8 g2|e8 e8 g2|e8 g8 C4 b4|a2 g4"], ["Sur le pont d'Avignon", "2/4", "c4 c4|c4 r4|d4 d4|d4 r4|e8 f8 g8 C8|b8 g8 r4"], ["Lightly row", "4/4", "g4 e4 e2|f4 d4 d2|c4 d4 e4 f4|g4 g4 g2"], ["Alle meine Entchen", "4/4", "c4 d4 e4 f4|g2 g2|a4 a4 a4 a4|g1"], ["Cucù (Kuckuck)", "3/4", "G2 E4|G2 E4|D4 C4 D4|C2 r4"], ["When the Saints", "4/4", "r4 c4 e4 f4|g1|r4 c4 e4 f4|g1"], ["Yankee Doodle", "2/4", "c8 c8 d8 e8|c8 e8 d4|c8 c8 d8 e8|c4 b4"], ["Pop goes the weasel", "6/8", "c4 c8 d4 d8|e8 g8 e8 c4."], ["La donna è mobile (Verdi)", "3/8", "e8 e8 e8|g8. fs d8|d8 d8 d8|f8. es c8"], ["Minuetto in Sol (Petzold)", "3/4", "g4 c8 d8 e8 f8|g4 c4 c4|a4 f8 g8 a8 b8|C4 c4 c4"], ["Piccola serenata notturna (Mozart)", "4/4", "C4 r8 g8 C4 r8 g8|C8 g8 C8 E8 G4 r4"], ["Il mattino (Grieg)", "6/8", "g8 e8 d8 c8 d8 e8|g8 e8 d8 c8 d8 e8|d8 e8 g8 e8 g8 a8|e8 g8 e8 d4."], ["Can-can (Offenbach)", "2/4", "c4 d8 f8|e8 d8 g8 g8|g8 a8 e8 g8|f8 a8 a4"], ["Bingo", "4/4", "g4 c4 c4 g4|a4 a4 g4 g4|c4 c4 d4 d4|e2 c4 r4"], ["Campane di Westminster", "3/4", "b4 g4 a4|d2.|d4 a4 b4|g2."], ["Skip to my Lou", "2/4", "e8 e8 c8 c8|e8 e8 g4|d8 d8 b8 b8|d8 d8 f4"], ["This old man", "4/4", "g4 e4 g2|g4 e4 g2|a4 g4 f4 e4|d4 e4 f2"], ["Largo dal Nuovo Mondo (Dvořák)", "4/4", "e4. g8 g2|e4. d8 c2|d4 e4 g4 e4|d1"], ["Sonata facile (Mozart)", "4/4", "C2 E4 G4|b4. C8 D8 C8 C4"], ["Sul bel Danubio blu (Strauss)", "3/4", "c4 c4 e4|g4 g2|G4 G2|E4 E2"], ["Astro del ciel", "6/8", "g4. a8 g4|e2.|g4. a8 g4|e2.|D2 D4|b2.|C2 C4|g2."], ["Deck the halls", "4/4", "G4. F8 E4 D4|C4 D4 E4 C4|D8 E8 F8 D8 E4. D8|C4 b4 C2"], ["We wish you a merry Christmas", "3/4", "C4 C8 D8 C8 b8|a4 a4 a4|D4 D8 E8 D8 C8|b4 g4 g4"], ["Joy to the world", "2/4", "C4 b8. as|g4. f8|e4 d4|c4. g8"], ["Oh! Susanna (Foster)", "4/4", "c8 d8 e4 g4 g4|a4 g4 e4. c8|d4 e4 e4 d4|c4 d2 r4"], ["Camptown Races (Foster)", "2/4", "g8 g8 e8 g8|a8 g8 e4|e8 d4.|e8 d4."], ["Michael row the boat ashore", "4/4", "c4 e4 g4. e8|g4 a4 g2|e4 g4 a4. g8|g1"], ["Amazing Grace", "3/4", "g2 C4|C2 E8 C8|E2 D4|C2 a4|g2."], ["Auld Lang Syne", "4/4", "C4. C8 C4 E4|D4. C8 D4 E8 D8|C4. C8 E4 G4|A2. r4"], ["Clementine", "3/4", "g8. gs g4 d4|b8. bs b4 g4|g8. bs D4. D8|C8 b8 a2"], ["Aura Lee", "4/4", "c4 f4 e4 f4|g4 d4 g2|f4 e4 d4 e4|f1"], ["Simple Gifts", "2/4", "g8 g8 C8 C8|D8 E8 C8 E8|F8 G8 G8 F8|E8 D8 C4"], ["Red River Valley", "4/4", "g8 C8 E4 E4 E4|E8 D8 E8 D8 C2|g8 C8 E4 C4 E4|G4. F8 E2"], ["She'll be coming round the mountain", "4/4", "C4 C4 C4 a8 g8|E4 C4 g2|C4 C4 D4 E4|D1"], ["Marcia nuziale (Wagner)", "4/4", "g4 C8. Cs C2|g4 D8. bs C2|g4 C8. Fs F4. E8|D8. Cs b8. Cs D2"], ["Canone (Pachelbel)", "4/4", "E2 D2|C2 b2|a2 g2|a2 b2"], ["La primavera (Vivaldi)", "4/4", "c4 e4 e4 e4|d8 c8 g2 g8 f8|e4 e4 e4 d8 c8|g2. r4"], ["Guglielmo Tell (Rossini)", "4/4", "g8 g8 g4 g8 g8 g4|g8 g8 g4 C4 D4|E8 E8 E4 E8 E8 E4|D8 C8 b4 C2"], ["Quinta Sinfonia (Beethoven)", "2/4", "r8 E8 E8 E8|C2|r8 D8 D8 D8|b2"], ["Sinfonia La sorpresa (Haydn)", "2/4", "c8 c8 e8 e8|g8 g8 e4|f8 f8 d8 d8|b8 b8 g4"], ["Itsy bitsy spider", "6/8", "C4 C8 C4 D8|E4. E4 E8|D4 C8 D4 E8|C4. r4."], ["Rain rain go away", "2/4", "g4 e4|g8 g8 e4|g8 g8 e8 e8|g8 g8 e4"], ["Ach du lieber Augustin", "3/4", "G4. A8 G8 F8|E4 C4 C4|D4 g4 g4|E4 C4 C4"], ["Here we go round the mulberry bush", "6/8", "c4 c8 c4 e8|g4 g8 e4 c8|d4 d8 d4 b8|g4. r4."], ["Alouette", "2/4", "C4. D8|E4 E4|D8 C8 D8 E8|C4 g4"], ["Alleluia (Händel)", "4/4", "C4 g8. as g4 r4|C4 g8. as g4 r4|E4 D8 C8 b4 a4|g1"], ["London's burning", "4/4", "g4 g4 C2|g4 g4 C2|E4 E4 D4 D4|E4 E4 D4 D4"], ["Three blind mice", "6/8", "e4. d4.|c2.|e4. d4.|c2.|g4. f8 f8 f8|e2."], ["Go tell Aunt Rhody", "4/4", "e2 e4 d4|c2 c2|d2 d4 f4|e4 d4 c2"], ["Hush little baby", "4/4", "g4 E8 E8 E4 E4|D8 D8 D8 C8 C2|g4 D8 D8 D4 D4|C8 C8 b8 b8 C2"], ["Kumbaya", "4/4", "c4 e4 g2|g4 a4 a4 g4|c4 e4 g2|f4 e4 d2"], ["Adeste fideles", "4/4", "C4 C2 g4|C4 D2 g4|E4 D4 E4 F4|E2 D4 r4"], ["Away in a manger", "3/4", "g4 C4 C4|D8 E8 C4 C4|E8 F8 G4 G4|A4 F2"], ["Good King Wenceslas", "4/4", "C4 C4 C4 D4|C4 C4 g2|a4 g4 a4 b4|C2 C2"], ["Sonata in La (Mozart)", "6/8", "E8. Fs E8 G4 G8|D8. Es D8 F4 F8|C4 E8 b4 D8|C4. r4."]];
+const CANZ=[["Fra Martino", "4/4", "c4 d4 e4 c4|c4 d4 e4 c4|e4 f4 g2|e4 f4 g2"], ["Brilla brilla la stellina", "4/4", "c4 c4 g4 g4|a4 a4 g2|f4 f4 e4 e4|d4 d4 c2"], ["Inno alla gioia (Beethoven)", "4/4", "e4 e4 f4 g4|g4 f4 e4 d4|c4 c4 d4 e4|e4. d8 d2"], ["Mary had a little lamb", "4/4", "e4. d8 c4 d4|e4 e4 e2|d4 d4 d2|e4 g4 g2"], ["Jingle Bells", "4/4", "e4 e4 e2|e4 e4 e2|e4 g4 c4. d8|e1"], ["Old MacDonald", "4/4", "g4 g4 g4 d4|e4 e4 d2|b4 b4 a4 a4|g2 r2"], ["London Bridge", "4/4", "g4. a8 g4 f4|e4 f4 g2|d4 e4 f2|e4 f4 g2"], ["Au clair de la lune", "4/4", "c4 c4 c4 d4|e2 d2|c4 e4 d4 d4|c1"], ["Row row row your boat", "6/8", "c4. c4.|c4 d8 e4.|e4 d8 e4 f8|g2."], ["Hot cross buns", "4/4", "e4 d4 c2|e4 d4 c2|c8 c8 c8 c8 d8 d8 d8 d8|e4 d4 c2"], ["Ninna nanna (Brahms)", "3/4", "e8 e8 g2|e8 e8 g2|e8 g8 C4 b4|a2 g4"], ["Sur le pont d'Avignon", "2/4", "c4 c4|c4 r4|d4 d4|d4 r4|e8 f8 g8 C8|b8 g8 r4"], ["Lightly row", "4/4", "g4 e4 e2|f4 d4 d2|c4 d4 e4 f4|g4 g4 g2"], ["Alle meine Entchen", "4/4", "c4 d4 e4 f4|g2 g2|a4 a4 a4 a4|g1"], ["Cucù (Kuckuck)", "3/4", "G2 E4|G2 E4|D4 C4 D4|C2 r4"], ["When the Saints", "4/4", "r4 c4 e4 f4|g1|r4 c4 e4 f4|g1"], ["Yankee Doodle", "2/4", "c8 c8 d8 e8|c8 e8 d4|c8 c8 d8 e8|c4 b4"], ["Pop goes the weasel", "6/8", "c4 c8 d4 d8|e8 g8 e8 c4."], ["La donna è mobile (Verdi)", "3/8", "e8 e8 e8|g8. fs d8|d8 d8 d8|f8. es c8"], ["Minuetto in Sol (Petzold)", "3/4", "g4 c8 d8 e8 f8|g4 c4 c4|a4 f8 g8 a8 b8|C4 c4 c4"], ["Piccola serenata notturna (Mozart)", "4/4", "C4 r8 g8 C4 r8 g8|C8 g8 C8 E8 G4 r4"], ["Il mattino (Grieg)", "6/8", "g8 e8 d8 c8 d8 e8|g8 e8 d8 c8 d8 e8|d8 e8 g8 e8 g8 a8|e8 g8 e8 d4."], ["Can-can (Offenbach)", "2/4", "c4 d8 f8|e8 d8 g8 g8|g8 a8 e8 g8|f8 a8 a4"], ["Bingo", "4/4", "g4 c4 c4 g4|a4 a4 g4 g4|c4 c4 d4 d4|e2 c4 r4"], ["Campane di Westminster", "3/4", "b4 g4 a4|d2.|d4 a4 b4|g2."], ["Skip to my Lou", "2/4", "e8 e8 c8 c8|e8 e8 g4|d8 d8 b8 b8|d8 d8 f4"], ["This old man", "4/4", "g4 e4 g2|g4 e4 g2|a4 g4 f4 e4|d4 e4 f2"], ["Largo dal Nuovo Mondo (Dvořák)", "4/4", "e4. g8 g2|e4. d8 c2|d4 e4 g4 e4|d1"], ["Sonata facile (Mozart)", "4/4", "C2 E4 G4|b4. C8 D8 C8 C4"], ["Sul bel Danubio blu (Strauss)", "3/4", "c4 c4 e4|g4 g2|G4 G2|E4 E2"], ["Astro del ciel", "6/8", "g4. a8 g4|e2.|g4. a8 g4|e2.|D2 D4|b2.|C2 C4|g2."], ["Deck the halls", "4/4", "G4. F8 E4 D4|C4 D4 E4 C4|D8 E8 F8 D8 E4. D8|C4 b4 C2"], ["We wish you a merry Christmas", "3/4", "C4 C8 D8 C8 b8|a4 a4 a4|D4 D8 E8 D8 C8|b4 g4 g4"], ["Joy to the world", "2/4", "C4 b8. as|g4. f8|e4 d4|c4. g8"], ["Oh! Susanna (Foster)", "4/4", "c8 d8 e4 g4 g4|a4 g4 e4. c8|d4 e4 e4 d4|c4 d2 r4"], ["Camptown Races (Foster)", "2/4", "g8 g8 e8 g8|a8 g8 e4|e8 d4.|e8 d4."], ["Michael row the boat ashore", "4/4", "c4 e4 g4. e8|g4 a4 g2|e4 g4 a4. g8|g1"], ["Amazing Grace", "3/4", "g2 C4|C2 E8 C8|E2 D4|C2 a4|g2."], ["Auld Lang Syne", "4/4", "C4. C8 C4 E4|D4. C8 D4 E8 D8|C4. C8 E4 G4|A2. r4"], ["Clementine", "3/4", "g8. gs g4 d4|b8. bs b4 g4|g8. bs D4. D8|C8 b8 a2"], ["Aura Lee", "4/4", "c4 f4 e4 f4|g4 d4 g2|f4 e4 d4 e4|f1"], ["Simple Gifts", "2/4", "g8 g8 C8 C8|D8 E8 C8 E8|F8 G8 G8 F8|E8 D8 C4"], ["Red River Valley", "4/4", "g8 C8 E4 E4 E4|E8 D8 E8 D8 C2|g8 C8 E4 C4 E4|G4. F8 E2"], ["She'll be coming round the mountain", "4/4", "C4 C4 C4 a8 g8|E4 C4 g2|C4 C4 D4 E4|D1"], ["Marcia nuziale (Wagner)", "4/4", "g4 C8. Cs C2|g4 D8. bs C2|g4 C8. Fs F4. E8|D8. Cs b8. Cs D2"], ["Canone (Pachelbel)", "4/4", "E2 D2|C2 b2|a2 g2|a2 b2"], ["La primavera (Vivaldi)", "4/4", "c4 e4 e4 e4|d8 c8 g2 g8 f8|e4 e4 e4 d8 c8|g2. r4"], ["Guglielmo Tell (Rossini)", "4/4", "g8 g8 g4 g8 g8 g4|g8 g8 g4 C4 D4|E8 E8 E4 E8 E8 E4|D8 C8 b4 C2"], ["Quinta Sinfonia (Beethoven)", "2/4", "r8 E8 E8 E8|C2|r8 D8 D8 D8|b2"], ["Sinfonia La sorpresa (Haydn)", "2/4", "c8 c8 e8 e8|g8 g8 e4|f8 f8 d8 d8|b8 b8 g4"], ["Itsy bitsy spider", "6/8", "C4 C8 C4 D8|E4. E4 E8|D4 C8 D4 E8|C4. r4."], ["Rain rain go away", "2/4", "g4 e4|g8 g8 e4|g8 g8 e8 e8|g8 g8 e4"], ["Ach du lieber Augustin", "3/4", "G4. A8 G8 F8|E4 C4 C4|D4 g4 g4|E4 C4 C4"], ["Here we go round the mulberry bush", "6/8", "c4 c8 c4 e8|g4 g8 e4 c8|d4 d8 d4 b8|g4. r4."], ["Alouette", "2/4", "C4. D8|E4 E4|D8 C8 D8 E8|C4 g4"], ["Alleluia (Händel)", "4/4", "C4 g8. as g4 r4|C4 g8. as g4 r4|E4 D8 C8 b4 a4|g1"], ["London's burning", "4/4", "g4 g4 C2|g4 g4 C2|E4 E4 D4 D4|E4 E4 D4 D4"], ["Three blind mice", "6/8", "e4. d4.|c2.|e4. d4.|c2.|g4. f8 f8 f8|e2."], ["Go tell Aunt Rhody", "4/4", "e2 e4 d4|c2 c2|d2 d4 f4|e4 d4 c2"], ["Hush little baby", "4/4", "g4 E8 E8 E4 E4|D8 D8 D8 C8 C2|g4 D8 D8 D4 D4|C8 C8 b8 b8 C2"], ["Kumbaya", "4/4", "c4 e4 g2|g4 a4 a4 g4|c4 e4 g2|f4 e4 d2"], ["Adeste fideles", "4/4", "C4 C2 g4|C4 D2 g4|E4 D4 E4 F4|E2 D4 r4"], ["Away in a manger", "3/4", "g4 C4 C4|D8 E8 C4 C4|E8 F8 G4 G4|A4 F2"], ["Good King Wenceslas", "4/4", "C4 C4 C4 D4|C4 C4 g2|a4 g4 a4 b4|C2 C2"], ["Sonata in La (Mozart)", "6/8", "E8. Fs E8 G4 G8|D8. Es D8 F4 F8|C4 E8 b4 D8|C4. r4."], ["Pop: Estate (originale)", "4/4", "e8 g8 a4 a8 g8 e4|d8 e8 g4 g2|e8 g8 a4 C8 a8 g4|e2 r2"], ["Pop: Onde (originale)", "4/4", "C4. a8 g4 e4|g4. e8 d2|C4. a8 g4 C4|D1"], ["Pop: Selfie (originale)", "4/4", "g8 g8 g8 a8 g4 e4|d8 d8 d8 e8 d4 c4|e8 e8 g8 a8 C4 a4|g2. r4"], ["Pop: Notte in città (originale)", "4/4", "a4 r8 a8 C4 a4|g4 r8 g8 e2|a4 r8 a8 C4 D4|E1"], ["Pop: Corri (originale)", "4/4", "c8 e8 g8 C8 b8 g8 e4|f8 a8 C8 a8 g2|c8 e8 g8 C8 b8 g8 E4|D2 C2"], ["Pop: Ballo di classe (originale)", "4/4", "e4 e8 e8 g4 e4|d4 d8 d8 f4 d4|e4 e8 e8 g4 C4|b4 g4 C2"]];
 const PL={};'cdefgab'.split('').forEach((c,i)=>PL[c]=i-2);'CDEFGA'.split('').forEach((c,i)=>PL[c]=i+5);
 const DU={'1':32,'2':16,'4':8,'8':4,'s':2};
 function parseSong(m){return m.split('|').map(b=>b.trim().split(/\s+/).map(t=>{const g=t.match(/^([a-gA-Gr])([1248s])(\.?)$/),dot=!!g[3],r=g[1]==='r';return{b:DU[g[2]],d:DU[g[2]]*(dot?1.5:1),dot,r,p:r?4:PL[g[1]]}}))}
@@ -164,11 +213,11 @@ const hue=i=>`hsl(${Math.round(130-130*i/(EXL.length-1))},68%,44%)`;
 const exList=lv=>(lv==='CANZONCINE'||lv==='DETTATO')?CANZ:EXL;
 let TGT=[];
 
-let S={num:4,den:4,bars:[[],[],[],[]],act:0,sel:{b:8,r:false},dot:false,theme:'Classico',pc:true};
-let SF={on:false,sc:[0,0],t:0,tg:5,names:['Giocatore 1','Giocatore 2'],end:false};
+let S={num:4,den:4,bars:[[],[],[],[]],act:0,sel:{b:8,r:false},dot:false,theme:'Celeste',pc:true};
+let SF={mode:'free',song:0,on:false,sc:[0,0],t:0,tg:5,names:['Giocatore 1','Giocatore 2'],end:false};
 let E={on:false,lv:'FACILE',i:0,done:{},ok:false,help:true};
 const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
-S=Object.assign(S,ld('rb2S')||{});SF=Object.assign(SF,ld('rb2F')||{});E=Object.assign(E,ld('rb2E')||{});S.pc=true;if(E.lv!=='CANZONCINE'){E.lv='ESERCIZI';if(E.i>=24)E.i=0}if(E.lv==='DETTATO'){E.lv='CANZONCINE';E.i=0}
+S=Object.assign(S,ld('rb2S')||{});SF=Object.assign(SF,ld('rb2F')||{});E=Object.assign(E,ld('rb2E')||{});E.pts=E.pts||{};E.help=false;S.pc=true;if(E.lv!=='CANZONCINE'){E.lv='ESERCIZI';if(E.i>=24)E.i=0}if(E.lv==='DETTATO'){E.lv='CANZONCINE';E.i=0}
 const save=()=>{try{localStorage.setItem('rb2S',JSON.stringify(S));localStorage.setItem('rb2F',JSON.stringify(SF));localStorage.setItem('rb2E',JSON.stringify(E))}catch(e){}};
 const $=id=>document.getElementById(id);
 const PB=document.getElementById('palBox');
@@ -225,7 +274,7 @@ function pieSVG(bar,cx,cy,r,nums){
 }
 
 function renderStaff(){
-  const C=cap(),el=$('staff');el.innerHTML='';
+  const C=cap(),el=$('staff'),sl=el.scrollLeft;el.innerHTML='';if(el.nextElementSibling!==PB)el.after(PB);
   S.bars.forEach((bar,i)=>{
     const first=i===0,lead=first?84:14,W=360,NW=W-lead-34,t=tot(bar),den=Math.max(C,t);
     let s=`<svg viewBox="0 -46 ${W} 196">`;
@@ -244,9 +293,11 @@ function renderStaff(){
     s+='</svg>';
     const div=document.createElement('div');
     div.className='bar'+(i===S.act?' act':'')+(t===C?' full':'')+(t>C?' over':'');
-    div.innerHTML=s;el.appendChild(div);if(i===S.act)el.appendChild(PB);
+    div.innerHTML=s;el.appendChild(div);
     const svg=div.firstChild;
-    svg.addEventListener('pointerdown',e=>{
+    svg.addEventListener('pointerdown',e=>{DN={x:e.clientX,y:e.clientY,t:Date.now()}});
+    svg.addEventListener('pointerup',e=>{
+      if(PINCH||!DN||Math.hypot(e.clientX-DN.x,e.clientY-DN.y)>12)return;DN=null;
       const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
       const q=pt.matrixTransform(svg.getScreenCTM().inverse());
       if(first&&q.x<80&&q.y>40){toggle('tsPanel',true);return}
@@ -254,6 +305,17 @@ function renderStaff(){
     });
   });
 }
+let DN=null,PINCH=false,P0=0,BW0=0;
+function applyBW(){if(S.bw)document.documentElement.style.setProperty('--bw',S.bw+'px')}
+(function(){const st=document.getElementById('staff');const d=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+ st.addEventListener('touchstart',e=>{if(e.touches.length===2){PINCH=true;P0=d(e.touches);BW0=(st.querySelector('.bar')||{}).offsetWidth||360;e.preventDefault()}},{passive:false});
+ st.addEventListener('touchmove',e=>{if(PINCH&&e.touches.length===2){e.preventDefault();S.bw=Math.round(Math.max(180,Math.min(1000,BW0*d(e.touches)/P0)));applyBW()}},{passive:false});
+ st.addEventListener('touchend',e=>{if(e.touches.length===0){if(PINCH){save();setTimeout(()=>PINCH=false,80)}}});
+ st.addEventListener('wheel',e=>{if(e.ctrlKey){e.preventDefault();const w=(st.querySelector('.bar')||{}).offsetWidth||360;S.bw=Math.round(Math.max(180,Math.min(1000,w*(e.deltaY<0?1.08:.92))));applyBW();save()}},{passive:false});
+})();
+document.getElementById('zReset').onclick=()=>{S.bw=0;document.documentElement.style.removeProperty('--bw');save()};
+applyBW();
+function scrollAct(){const el=$('staff'),a=el.children[S.act];if(a)el.scrollTo({left:a.offsetLeft-(el.clientWidth-a.clientWidth)/2,behavior:'smooth'})}
 function renderPie(){
   const C=cap(),bar=S.bars[S.act]||[],t=tot(bar);
   
@@ -265,30 +327,66 @@ let MT;function msg(t,c){const m=$('msg');m.textContent=t;m.className=(c||'')+(t
 
 function insert(i,p,div){
   if(SF.on&&SF.end){msg('Sfida finita! Premi Nuova sfida','bad');return}
+  if(SF.on&&SF.mode==='canz'){const Cc=cap();let k=S.bars.findIndex(b=>tot(b)<Cc);if(k<0)return;i=k;S.act=k;const bb=S.bars[k],tg=TGT[k][bb.length];
+    const ok=tg&&tg.b===S.sel.b&&tg.dot===S.dot&&tg.r===S.sel.r&&(tg.r||tg.p===p),who=SF.names[SF.t];
+    if(!ok){if(!S.sel.r)tone(p,.25);SF.t=1-SF.t;const dv=document.querySelectorAll('.bar')[k];if(dv){dv.classList.remove('shake');void dv.offsetWidth;dv.classList.add('shake')}
+      msg('❌ '+who+' sbaglia: 0 punti. Tocca a '+SF.names[SF.t],'bad');sfRender();return}
+    bb.push({b:tg.b,d:tg.d,dot:tg.dot,r:tg.r,p:tg.p});if(!tg.r)tone(tg.p,.35);SF.sc[SF.t]++;
+    if(S.bars.every(b=>tot(b)===Cc)){SF.end=true;const[a,b2]=SF.sc;$('sMsg').textContent=a===b2?'🤝 Pareggio! '+a+' a '+b2:'🏆 Ha vinto '+SF.names[a>b2?0:1]+'! ('+a+' a '+b2+')';fanfare();msg('Motivo completato!','ok')}
+    else{if(tot(bb)===Cc)S.act=k+1;SF.t=1-SF.t;msg('✓ +1 a '+who+'! Tocca a '+SF.names[SF.t],'ok')}
+    save();render();sfRender();return}
   const C=cap(),bar=S.bars[i],d=S.sel.b*(S.dot?1.5:1);
   if(tot(bar)+d>C){div.classList.remove('shake');void div.offsetWidth;div.classList.add('shake');
     msg(tot(bar)===C?'Battuta già piena! Passa alla prossima.':'Non ci sta! Manca solo: '+decomp(C-tot(bar)),'bad');
     if(SF.on&&tot(bar)<C)sfErr();renderPie();render();return}
   S.bars.forEach(b=>b.forEach(n=>delete n.ck));
   if(isSong()&&!isDict()){const tg=TGT[i][bar.length];
-    var WRONG=tg&&!tg.r&&!S.sel.r&&tg.p!==p;
-    if(tg&&(tg.b!==S.sel.b||tg.dot!==S.dot||tg.r!==S.sel.r)){
+    const figBad=tg&&(tg.b!==S.sel.b||tg.dot!==S.dot||tg.r!==S.sel.r),pk=i+'-'+bar.length;
+    var WRONG=tg&&(figBad||(!tg.r&&tg.p!==p));
+    if(tg&&!(pk in E.pts)){E.pts[pk]=WRONG?0:1}
+    if(figBad&&!E.exp){
       div.classList.remove('shake');void div.offsetWidth;div.classList.add('shake');
       let h=tg.r!==S.sel.r?(tg.r?'Qui ci vuole una pausa!':'Qui ci vuole una nota, non una pausa!'):(tg.b!==S.sel.b||tg.dot!==S.dot)?'Figura sbagliata: guarda bene la durata'+(tg.dot?' (c\'è il punto!)':''):(tg.p>p?'Nota troppo bassa: sali!':'Nota troppo alta: scendi!');
-      if(!tg.r&&!S.sel.r&&tg.p!==p)tone(p,.25);msg('❌ '+h,'bad');return}}
+      if(!tg.r&&!S.sel.r&&tg.p!==p)tone(p,.25);msg('❌ '+h,'bad');exChips();save();return}}
   bar.push({b:S.sel.b,d,dot:S.dot,r:S.sel.r,p:S.sel.r?4:p,w:isSong()&&!isDict()&&typeof WRONG!=='undefined'&&WRONG});
   if(!S.sel.r)tone(p,0.35);
+  if(isSong()&&!isDict())msg(WRONG?'✗ Nota diversa dall\'originale':'✓ +1 punto!',WRONG?'bad':'ok');
   if(tot(bar)===C){msg('🎉 Battuta completa!','ok');if(SF.on)sfOk();
     if(i===S.bars.length-1){if(!E.on)S.bars.push([]),S.act=i+1}else S.act=i+1}
-  else msg(S.sel.r?'Pausa inserita':'Nota '+NAMES[pn(p)],'');
+  else if(!isSong())msg(S.sel.r?'Pausa inserita':'Nota '+NAMES[pn(p)],'');
   if(E.on)exCheck();
   save();render();
 }
 
 let AC;function ac(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}
 function freq(p){const d=p+2,o=Math.floor(d/7);return 440*Math.pow(2,(60+12*o+SEMI[(d%7+7)%7]-69)/12)}
-function tone(p,len,at){try{const a=ac(),t=at||a.currentTime,o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=freq(p);
-  len=Math.max(.12,len);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.32,t+.015);g.gain.linearRampToValueAtTime(.24,t+len*.85);g.gain.linearRampToValueAtTime(0,t+len);o.connect(g).connect(a.destination);o.start(t);o.stop(t+len+.02)}catch(e){}}
+function tone(p,len,at){try{const a=ac(),t=at||a.currentTime,f=freq(p),out=a.createGain(),src=[];len=Math.max(.15,len);
+  const I=S.ins||'pianoforte',e=Math.max(t+.09,t+len-.06);
+  const osc=(ty,fr,g)=>{const o=a.createOscillator();o.type=ty;o.frequency.value=fr;const gg=a.createGain();gg.gain.value=g;o.connect(gg).connect(out);src.push(o);return o};
+  const vib=(o,r,d)=>{const l=a.createOscillator();l.frequency.value=r;const lg=a.createGain();lg.gain.value=d;l.connect(lg).connect(o.frequency);src.push(l)};
+  let flt=null;const G=out.gain;G.setValueAtTime(0,t);
+  if(I==='chitarra'){osc('sawtooth',f,.3);osc('triangle',f,.5);flt=a.createBiquadFilter();flt.type='lowpass';flt.frequency.setValueAtTime(3200,t);flt.frequency.exponentialRampToValueAtTime(800,t+.35);
+    G.linearRampToValueAtTime(.5,t+.004);G.exponentialRampToValueAtTime(.06,t+Math.min(len,1.6));G.linearRampToValueAtTime(0,t+len+.05)}
+  else if(I==='violino'){const o=osc('sawtooth',f,.32);flt=a.createBiquadFilter();flt.type='lowpass';flt.frequency.value=2600;vib(o,5.5,f*.007);
+    G.linearRampToValueAtTime(.38,t+.08);G.setValueAtTime(.38,e);G.linearRampToValueAtTime(0,t+len+.03)}
+  else if(I==='flauto'){const o=osc('sine',f*2,.6);osc('triangle',f*4,.04);vib(o,5,f*.008);
+    G.linearRampToValueAtTime(.4,t+.06);G.setValueAtTime(.4,e);G.linearRampToValueAtTime(0,t+len+.03)}
+  else{osc('triangle',f,.6);osc('sine',f*2,.22);osc('sine',f*3,.07);
+    G.linearRampToValueAtTime(.45,t+.006);G.exponentialRampToValueAtTime(.1,t+Math.min(len,1.3));G.linearRampToValueAtTime(0,t+len+.05)}
+  if(flt)out.connect(flt).connect(a.destination);else out.connect(a.destination);
+  src.forEach(o=>{o.start(t);o.stop(t+len+.12)});return src}catch(e){return[]}}
+const PLY={nodes:[],btn:null,on:false,idx:0,key:''};
+function setPB(b,on){if(!b)return;if(!b.dataset.l)b.dataset.l=b.textContent;b.textContent=on?'⏸ Pausa':b.dataset.l;b.classList.toggle('on',on)}
+function stopPlay(keep){PLY.nodes.forEach(o=>{try{o.stop()}catch(e){}});PLY.nodes=[];clearTimeout(PLY.tm);PLY.on=false;setPB(PLY.btn,false);if(!keep)PLY.idx=0}
+function playSeq(seq,btn,k){
+  const key=JSON.stringify(seq.map(n=>[n.p,n.d,n.r]))+k;
+  if(PLY.on&&PLY.btn===btn){const el=ac().currentTime-PLY.t0;let acc=0,i=PLY.from;while(i<seq.length&&acc+seq[i].d*PLY.u<=el+.01){acc+=seq[i].d*PLY.u;i++}stopPlay(true);PLY.idx=i;return}
+  if(PLY.on)stopPlay();
+  if(PLY.btn!==btn||PLY.key!==key||PLY.idx>=seq.length)PLY.idx=0;
+  PLY.btn=btn;PLY.key=key;
+  const a=ac(),u=k*0.6/8*(S.den==8?2:1);let t=a.currentTime+.08;PLY.t0=t;PLY.u=u;PLY.from=PLY.idx;
+  for(let i=PLY.idx;i<seq.length;i++){const n=seq[i];if(!n.r)PLY.nodes.push(...tone(n.p,n.d*u*.98,t));t+=n.d*u}
+  PLY.on=true;setPB(btn,true);PLY.tm=setTimeout(()=>{PLY.on=false;PLY.idx=0;setPB(btn,false)},(t-a.currentTime)*1000+150)}
 function fanfare(){[0,2,4,7].forEach((p,i)=>{try{tone(p,.3,ac().currentTime+i*.15)}catch(e){}})}
 
 function palette(){
@@ -303,7 +401,7 @@ function toggle(id,force){const p=$(id);p.classList.toggle('open',force===undefi
 function renderTS(){$('tsBtn').innerHTML=`${S.num}/${S.den}<small>tempo</small>`;const p=$('tsPanel');p.innerHTML='';
   TS.forEach(([n,d])=>{const b=document.createElement('button');b.textContent=n+'/'+d;b.className=n==S.num&&d==S.den?'on':'';
     b.onclick=()=>{if(E.on){E.on=false;exRender()}S.num=n;S.den=d;toggle('tsPanel',false);msg('Tempo cambiato in '+n+'/'+d,'');save();render()};p.appendChild(b)})}
-function render(){renderTS();renderStaff();renderPie();palette();if(E.on)exChips()}
+function render(){renderTS();renderStaff();scrollAct();renderPie();palette();if(E.on)exChips()}
 
 /* ---- TEMI ---- */
 function applyTH(n){const t=TH[n]||TH.Classico,r=document.documentElement.style;
@@ -319,29 +417,31 @@ function applyTH(n){const t=TH[n]||TH.Classico,r=document.documentElement.style;
 function sfRender(){$('sfida').classList.toggle('on',SF.on);$('sfBtn').classList.toggle('on',SF.on);
   [0,1].forEach(k=>{$('s'+k).textContent=SF.sc[k];$('p'+k).classList.toggle('turn',SF.t===k&&!SF.end);if(document.activeElement!==$('n'+k))$('n'+k).value=SF.names[k]});
   document.querySelectorAll('[data-t]').forEach(b=>b.classList.toggle('on',+b.dataset.t===SF.tg));
-  if(!SF.end)$('sMsg').textContent='Tocca a '+SF.names[SF.t]+': riempi la battuta!';save()}
+  const cz=SF.mode==='canz';$('sfM0').classList.toggle('on',!cz);$('sfM1').classList.toggle('on',cz);$('sfFree').style.display=cz?'none':'';$('sfCanz').style.display=cz?'':'none';
+  const sel=$('sfSong');if(!sel.options.length)CANZ.forEach((c,k)=>sel.add(new Option((k+1)+'. '+c[0],k)));sel.value=SF.song||0;
+  if(!SF.end)$('sMsg').textContent='Tocca a '+SF.names[SF.t]+(cz?': metti la prossima nota!':': riempi la battuta!');save()}
 function sfOk(){const k=SF.t;SF.sc[k]++;
   if(SF.sc[k]>=SF.tg){SF.end=true;$('sMsg').textContent='🏆 Ha vinto '+SF.names[k]+'! ('+SF.sc[0]+' a '+SF.sc[1]+')';fanfare()}
   else{SF.t=1-k;setTimeout(()=>msg('+1 punto a '+SF.names[k]+'! Ora tocca a '+SF.names[SF.t],'ok'),10)}
   sfRender()}
 function sfErr(){if(SF.end)return;const k=SF.t;S.bars[S.act]=[];SF.t=1-k;
   setTimeout(()=>{msg('❌ Sbagliato! Battuta svuotata, tocca a '+SF.names[SF.t],'bad');render()},10);sfRender()}
-function sfNew(){SF.sc=[0,0];SF.t=0;SF.end=false;S.bars=[[],[],[],[]];S.act=0;save();msg('Nuova sfida!','');render();sfRender()}
+function sfNew(){stopPlay();SF.sc=[0,0];SF.t=0;SF.end=false;S.bars=[[],[],[],[]];S.act=0;if(SF.mode==='canz'){const c=CANZ[SF.song||0];TGT=parseSong(c[2]);const [n,d]=c[1].split('/').map(Number);S.num=n;S.den=d;S.bars=TGT.map(()=>[])}save();msg('Nuova sfida!','');render();sfRender()}
 
 /* ---- ESERCIZI ---- */
 function exData(){return exList(E.lv)[E.i]}
-function exStart(lv,i){E.on=true;E.lv=lv;E.i=i;E.ok=false;let [ts,nb]=exData();E.sol=false;if(lv==='CANZONCINE'||lv==='DETTATO'){const c=exData();ts=c[1];TGT=parseSong(c[2]);nb=TGT.length}const [n,d]=ts.split('/').map(Number);
+function exStart(lv,i){stopPlay();E.on=true;E.lv=lv;E.i=i;E.ok=false;E.pts={};E.help=false;let [ts,nb]=exData();E.sol=false;if(lv==='CANZONCINE'||lv==='DETTATO'){const c=exData();ts=c[1];TGT=parseSong(c[2]);nb=TGT.length}const [n,d]=ts.split('/').map(Number);
   S.num=n;S.den=d;S.bars=Array.from({length:nb},()=>[]);S.act=0;
   if(SF.on){SF.on=false;sfRender()}
   msg(lv==='CANZONCINE'?'🎶 '+CANZ[i][0]+': via!':'Esercizio '+(i+1)+': via!','');save();exRender();render()}
 function exCounts(){const c={};S.bars.forEach(b=>b.forEach(n=>{const k=key(n);c[k]=(c[k]||0)+1}));return c}
 function exChips(){$('exHead').style.display=isSong()?'none':'';$('songHint').style.display='none';
-  $('reqLine').innerHTML=isSong()?`Ricopia nota per nota il motivo <u>${exData()[0]}</u>: scegli la figura giusta e tocca l'altezza giusta sul pentagramma.`:`Riempi le ${S.bars.length} battute in ${S.num}/${S.den} usando <u>ALMENO</u> queste figure:`;$('songTools').style.display=isSong()?'flex':'none';$('helpBtn').textContent=E.help?'👁 Aiuto: SÌ':'🙈 Aiuto: NO';['helpBtn'].forEach(id=>$(id).style.display=isDict()?'none':'');['slowBtn','ckBtn','solBtn'].forEach(id=>$(id).style.display=isDict()?'':'none');$('songHint').textContent=isDict()?'Ascolta e scrivi il motivo! Si parte da: '+(TGT[0]&&TGT[0][0]&&!TGT[0][0].r?NAMES[pn(TGT[0][0].p)]:'pausa')+' · '+TGT.length+' battute in '+S.num+'/'+S.den:'Copia il motivo nota per nota!';$('solBtn').textContent=E.sol?'🙈 Nascondi soluzione':'💡 Soluzione';if(isSong()){$('chips').innerHTML='';return}
+  $('reqLine').innerHTML=isSong()?`Ricopia il motivo <u>${exData()[0]}</u><div class="sub">Scegli la figura giusta e tocca l'altezza giusta sul pentagramma.</div>`:`Riempi le ${S.bars.length} battute in ${S.num}/${S.den} usando <u>ALMENO</u> queste figure:`;$('songTools').style.display=isSong()?'block':'none';$('ptsLbl').style.display=isSong()?'':'none';$('helpBtn').textContent=E.help?'👁 AIUTO: SÌ':'🙈 AIUTO: NO';$('helpBtn').classList.toggle('on',E.help);$('expBtn').textContent=E.exp?'🔥 ESPERTO: SÌ':'🔥 ESPERTO: NO';$('expBtn').classList.toggle('on',!!E.exp);if(isSong()){const tt=TGT.flat().length,pt=Object.values(E.pts||{}).reduce((a,b)=>a+b,0);$('ptsLbl').textContent='⭐ Punti: '+pt+' / '+tt}['helpBtn'].forEach(id=>$(id).style.display=isDict()?'none':'');['ckBtn','solBtn'].forEach(id=>$(id).style.display=isDict()?'':'none');$('songHint').textContent=isDict()?'Ascolta e scrivi il motivo! Si parte da: '+(TGT[0]&&TGT[0][0]&&!TGT[0][0].r?NAMES[pn(TGT[0][0].p)]:'pausa')+' · '+TGT.length+' battute in '+S.num+'/'+S.den:'Copia il motivo nota per nota!';$('solBtn').textContent=E.sol?'🙈 Nascondi soluzione':'💡 Soluzione';if(isSong()){$('chips').innerHTML='';return}
   const req=exData()[2],c=exCounts();
   $('chips').innerHTML=Object.entries(req).map(([k,v])=>{const h=Math.min(c[k]||0,v);return `<span class="${h>=v?'ok':''}">${h>=v?'✓ ':''}${v} ${kplur(k,v)}${h>0&&h<v?' <small>('+h+' fatt'+(h>1?'e':'a')+')</small>':''}</span>`}).join('')}
 function exCheck(){const C=cap();if(!S.bars.every(b=>tot(b)===C))return;
   if(isDict()){setTimeout(()=>msg('Battute piene! Premi ✔ Correggi','ok'),20);return}
-  if(isSong()){const nw=S.bars.reduce((a,b)=>a+b.filter(n=>n.w).length,0);setTimeout(()=>{if(!nw){E.ok=true;E.done[E.lv+E.i]=1;msg('⭐ Motivo completato! Premi «Ascolta quello che hai scritto»','ok');fanfare()}else msg('Hai finito! '+nw+(nw>1?' note diverse':' nota diversa')+' dall\'originale (in rosso): ascolta e confronta!','bad');save();exRender()},20);return}
+  if(isSong()){const nw=S.bars.reduce((a,b)=>a+b.filter(n=>n.w).length,0);setTimeout(()=>{const pt=Object.values(E.pts).reduce((a,b)=>a+b,0),tt=TGT.flat().length;if(!nw){E.ok=true;E.done[E.lv+E.i]=1;msg('⭐ Motivo completato! Punti '+pt+' su '+tt,'ok');fanfare()}else msg('Hai finito! '+nw+(nw>1?' note diverse':' nota diversa')+' dall\'originale (in rosso): ascolta e confronta!','bad');save();exRender()},20);return}
   const req=exData()[2],c=exCounts(),miss=Object.entries(req).filter(([k,v])=>(c[k]||0)<v);
   setTimeout(()=>{if(!miss.length){E.ok=true;E.done[E.lv+E.i]=1;msg('⭐ Esercizio superato! Bravissimo!','ok');fanfare();save();exRender()}
     else msg('Battute piene, ma mancano: '+miss.map(([k,v])=>(v-(c[k]||0))+' '+kname(k)).join(', ')+'. Premi Annulla e riprova!','bad')},20)}
@@ -349,17 +449,28 @@ function exRender(){$('exBox').classList.toggle('on',E.on);$('exBtn').classList.
   $('lvRow').innerHTML='';['CANZONCINE'].forEach(lv=>{const b=document.createElement('button');b.textContent=lv==='CANZONCINE'?'🎶 CANZONCINE':lv==='DETTATO'?'🎧 DETTATO':lv;b.style.background=LVCOL[lv];
     b.className=lv===E.lv?'on':'';b.style.background='';b.onclick=()=>{SLO=E.lv!=='CANZONCINE';exStart(E.lv==='CANZONCINE'?'ESERCIZI':'CANZONCINE',0)};$('lvRow').appendChild(b)});
   if(isSong()){const t=document.createElement('button');t.textContent=(SLO?'▴ Chiudi elenco':'▾ Scegli la canzoncina')+' ('+CANZ.length+')';t.onclick=()=>{SLO=!SLO;exRender()};$('lvRow').appendChild(t)}
-  $('numRow').style.display=isSong()&&!SLO?'none':'flex';
+  $('numRow').style.display=isSong()&&!SLO?'none':'flex';$('numRow').classList.toggle('songs',isSong());
   $('numRow').innerHTML='';exList(E.lv).forEach((_,i)=>{const b=document.createElement('button');b.textContent=(isSong()?(i+1)+'. '+CANZ[i][0]:(i+1))+(E.done[E.lv+i]?' ⭐':'');
     b.className=(isSong()?'sg ':'')+(i===E.i?'on':'');if(!isSong())b.style.background=hue(i);b.onclick=()=>{SLO=false;exStart(E.lv,i)};$('numRow').appendChild(b)});
-  const xd=exData(),ts=isSong()?xd[1]:xd[0],nb=isSong()?TGT.length:xd[1];$('exTitle').innerHTML=`<span style="color:${isSong()?LVCOL.CANZONCINE:hue(E.i)}">${isSong()?(isDict()?'🎧 ':'🎶 ')+xd[0]:'Esercizio '+(E.i+1)}</span> · tempo ${ts} · ${nb} battut${nb>1?'e':'a'}`+(E.ok?' · ⭐ Superato!':'');
+  const xd=exData(),ts=isSong()?xd[1]:xd[0],nb=isSong()?TGT.length:xd[1];$('exTitle').innerHTML=`<span style="color:${isSong()?LVCOL.CANZONCINE:hue(E.i)}">${isSong()?'':'Esercizio '+(E.i+1)+' · '}</span> tempo ${ts} · ${nb} battut${nb>1?'e':'a'}`+(E.ok?' · ⭐ Superato!':'');
   exChips()}
 
 /* ---- PULSANTI ---- */
 $('tsBtn').onclick=()=>toggle('tsPanel');
 $('thBtn').onclick=()=>toggle('thPanel');
+$('setBtn').onclick=()=>toggle('setPanel');
+function renderSet(){const p=$('setPanel');p.innerHTML='<div class="setl">STRUMENTO PER IL MOTIVETTO</div>';
+  [['pianoforte','🎹 Pianoforte'],['chitarra','🎸 Chitarra'],['violino','🎻 Violino'],['flauto','🌬️ Flauto']].forEach(([k,l])=>{const b=document.createElement('button');b.textContent=l;b.className=(S.ins||'pianoforte')===k?'on':'';
+  b.onclick=()=>{S.ins=k;save();renderSet();[0,2,4].forEach((q,j)=>tone(q,.35,ac().currentTime+j*.22))};p.appendChild(b)})}
+renderSet();
 
 $('exBtn').onclick=()=>{if(E.on){E.on=false;save();exRender()}else exStart(E.lv,E.i)};
+$('sfM0').onclick=()=>{SF.mode='free';sfNew()};
+$('sfM1').onclick=()=>{SF.mode='canz';sfNew()};
+$('sfSong').onchange=e=>{SF.song=+e.target.value;sfNew()};
+$('sfRnd').onclick=()=>{SF.song=Math.floor(Math.random()*CANZ.length);sfNew()};
+$('sfPlay').onclick=()=>playSeq(TGT.flat(),$('sfPlay'),1);
+$('sfMy').onclick=()=>playSeq(S.bars.flat(),$('sfMy'),1);
 $('sfBtn').onclick=()=>{SF.on=!SF.on;if(SF.on){if(E.on){E.on=false;exRender()}sfNew()}else sfRender()};
 $('sNew').onclick=sfNew;
 document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{SF.tg=+b.dataset.t;sfRender()});
@@ -369,18 +480,19 @@ PB.querySelector('#undo').onclick=()=>{let i=S.act;if(!S.bars[i].length&&i>0)i--
 $('clrBar').onclick=()=>{S.bars[S.act]=[];msg('Battuta svuotata','');save();render()};
 $('addBar').onclick=()=>{S.bars.push([]);S.act=S.bars.length-1;save();render()};
 $('clrAll').onclick=()=>{if(E.on){exStart(E.lv,E.i);return}S.bars=[[],[],[],[]];S.act=0;msg('Si ricomincia!','');save();render()};
-$('play').onclick=()=>{const a=ac();let t=a.currentTime+.1;const u=0.6/8*(S.den==8?2:1);
-  S.bars.forEach(b=>b.forEach(n=>{if(!n.r)tone(n.p,n.d*u*.97,t);t+=n.d*u}))};
+$('play').onclick=()=>playSeq(S.bars.flat(),$('play'),1);
 const playT=k=>{const a=ac();let t=a.currentTime+.1;const u=k*0.6/8*(S.den==8?2:1);TGT.forEach(b=>b.forEach(n=>{if(!n.r)tone(n.p,n.d*u*.97,t);t+=n.d*u}))};
-$('myPlay').onclick=()=>$('play').click();
-$('slowBtn').onclick=()=>playT(1.7);
+$('myPlay').onclick=()=>playSeq(S.bars.flat(),$('myPlay'),1);
+$('slowBtn').onclick=()=>playSeq(TGT.flat(),$('slowBtn'),1.7);
 $('solBtn').onclick=()=>{E.sol=!E.sol;save();render()};
 $('ckBtn').onclick=()=>{let g=0,tot2=0;TGT.forEach((tb,i)=>{const ub=S.bars[i]||[];tb.forEach((t,j)=>{tot2++;const n=ub[j];const ok=n&&n.b===t.b&&n.dot===t.dot&&n.r===t.r&&(t.r||n.p===t.p);if(n)n.ck=ok?2:1;if(ok)g++});ub.slice(tb.length).forEach(n=>n.ck=1)});
   if(g===tot2&&S.bars.every((b,i)=>b.length===(TGT[i]||[]).length)){E.ok=true;E.done[E.lv+E.i]=1;msg('⭐ Dettato perfetto! '+g+' su '+tot2,'ok');fanfare()}
   else msg('Giuste '+g+' su '+tot2+'. Le rosse sono sbagliate: correggi con Annulla e riprova!','bad');save();render();exRender()};
-$('songPlay').onclick=()=>{const a=ac();let t=a.currentTime+.1;const u=0.6/8*(S.den==8?2:1);TGT.forEach(b=>b.forEach(n=>{if(!n.r)tone(n.p,n.d*u*.97,t);t+=n.d*u}))};
+$('songPlay').onclick=()=>playSeq(TGT.flat(),$('songPlay'),1);
+$('expBtn').onclick=()=>{E.exp=!E.exp;save();exChips()};
 $('helpBtn').onclick=()=>{E.help=!E.help;save();render()};
 if(E.lv==='CANZONCINE'||E.lv==='DETTATO')TGT=parseSong(CANZ[E.i][2]);
+if(SF.on&&SF.mode==='canz'){const c=CANZ[SF.song||0];TGT=parseSong(c[2])}
 applyTH(S.theme);sfRender();exRender();
 </script>
 </body>
