@@ -6,69 +6,82 @@
 <title>Riempi la Battuta</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Music&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fdf6ec;--card:#fff;--head:#2b2340;--acc:#ff7a45;--txt:#2b2340;--ok:#2bb673;--bad:#e5484d}
+:root{--bg:#fdf6ec;--card:#fff;--head:#2b2340;--acc:#ff7a45;--txt:#2b2340;--ok:#22a861;--bad:#e5484d;--r:18px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--txt);transition:background .3s}
-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--head);color:#fff}
-h1{font-size:19px;margin:0}
-#thBtn{font-size:20px;background:none;border:0;margin-right:6px}
-#tsBtn{font:800 18px Nunito;background:var(--acc);color:#fff;border:0;border-radius:12px;padding:6px 14px;line-height:1}
-#tsBtn small{display:block;font-size:10px;font-weight:600}
-.panel{display:none;flex-wrap:wrap;gap:8px;padding:10px 14px;background:var(--card);border-bottom:3px solid var(--head)}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--txt);transition:background .3s;padding-bottom:20px}
+button{font-family:inherit;cursor:pointer;transition:transform .12s,box-shadow .2s,background .2s}
+button:active{transform:scale(.95)}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--head);color:#fff;box-shadow:0 4px 18px #0002}
+h1{font-size:18px;margin:0;letter-spacing:.2px}
+header div{display:flex;gap:8px;align-items:center}
+#thBtn{font-size:18px;background:#ffffff22;border:0;border-radius:12px;width:42px;height:42px}
+#tsBtn{font:800 18px Nunito;background:var(--acc);color:#fff;border:0;border-radius:14px;padding:6px 14px;line-height:1;box-shadow:0 3px 10px #0003}
+#tsBtn small{display:block;font-size:9px;font-weight:700;opacity:.9;text-transform:uppercase;letter-spacing:.5px}
+.panel{display:none;flex-wrap:wrap;gap:8px;padding:12px 16px;background:var(--card);box-shadow:0 8px 20px #0001}
 .panel.open{display:flex}
-#tsPanel button{font:800 17px Nunito;border:2px solid var(--txt);background:var(--card);color:var(--txt);border-radius:10px;padding:6px 12px}
-#tsPanel button.on{background:var(--head);color:#fff;border-color:var(--head)}
-#thPanel button{border:0;border-radius:12px;padding:0;width:96px;overflow:hidden;font:800 11px Nunito;box-shadow:0 0 0 2px #0002}
-#thPanel button i{display:flex;height:26px}#thPanel button i b{flex:1}
-#thPanel button span{display:block;padding:4px 2px}
-#thPanel button.on{box-shadow:0 0 0 4px var(--acc)}
-nav{display:flex;gap:8px;padding:10px 14px 0;flex-wrap:wrap}
-nav button,.tools button{font:800 15px Nunito;border:0;border-radius:12px;padding:10px 14px;background:var(--head);color:#fff}
-nav button.on{background:var(--acc)}
-.top{display:flex;align-items:center;gap:14px;padding:12px 14px;flex-wrap:wrap}
-#pie{width:130px;height:130px;flex:none}
-#info{flex:1;min-width:160px}
-#info .big{font-size:20px;font-weight:800}
-#msg{min-height:24px;font-weight:800;margin-top:6px}
-#msg.bad{color:var(--bad)} #msg.ok{color:var(--ok)}
-#staff{display:flex;flex-wrap:wrap;padding:0 8px}
-.bar{flex:1 1 300px;max-width:520px;min-width:260px;background:var(--card);border-radius:10px;margin:4px;border:3px solid transparent;touch-action:manipulation}
-.bar.act{border-color:var(--acc)} .bar.full{border-color:var(--ok)} .bar.over{border-color:var(--bad)}
-.bar.act.full{box-shadow:0 0 0 3px var(--acc)}
+#tsPanel button{font:800 16px Nunito;border:0;background:var(--bg);color:var(--txt);border-radius:12px;padding:8px 14px}
+#tsPanel button.on{background:var(--acc);color:#fff}
+#thPanel button{border:0;border-radius:14px;padding:0;width:92px;overflow:hidden;font:800 11px Nunito;box-shadow:0 2px 8px #0002}
+#thPanel button i{display:flex;height:24px}#thPanel button i b{flex:1}
+#thPanel button span{display:block;padding:5px 2px}
+#thPanel button.on{box-shadow:0 0 0 3px var(--acc)}
+nav{display:flex;gap:8px;padding:14px 16px 4px}
+nav button{flex:1;font:800 15px Nunito;border:0;border-radius:14px;padding:12px;background:var(--card);color:var(--txt);box-shadow:0 2px 10px #0001}
+nav button.on{background:var(--acc);color:#fff;box-shadow:0 4px 14px #0002}
+.top{display:flex;align-items:center;gap:16px;margin:10px 16px;padding:14px 16px;background:var(--card);border-radius:var(--r);box-shadow:0 2px 12px #0001}
+#pie{width:110px;height:110px;flex:none}
+#info{flex:1;min-width:150px}
+#info .big{font-size:18px;font-weight:800}
+#rest{font-size:14px;opacity:.75;margin-top:2px}
+#msg{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9;max-width:92vw;padding:10px 16px;border-radius:14px;background:var(--head);color:#fff;font-weight:800;font-size:15px;box-shadow:0 8px 24px #0004;text-align:center;opacity:0;pointer-events:none;transition:opacity .25s}
+#msg.show{opacity:1}
+#msg.bad{background:var(--bad)} #msg.ok{background:var(--ok)}
+.hint{padding:2px 18px 6px;font-size:13px;opacity:.7}
+#staff{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;padding:0 12px}
+.bar{background:var(--card);border-radius:var(--r);border:2px solid transparent;box-shadow:0 2px 12px #0001;touch-action:manipulation;transition:border-color .2s,box-shadow .2s}
+.bar.act{border-color:var(--acc);box-shadow:0 6px 20px #0002}
+.bar.full{border-color:var(--ok)} .bar.over{border-color:var(--bad)}
 .bar svg{width:100%;display:block;cursor:pointer}
-.hint{padding:4px 14px;font-size:14px;opacity:.8}
-.pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px;padding:8px 14px}
-.pal button{background:var(--card);border:2px solid #0002;border-radius:12px;padding:4px 2px;font:600 11px Nunito;color:var(--txt)}
-.pal button.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
-.pal svg{width:40px;height:52px;display:block;margin:0 auto}
-h3{margin:10px 14px 0;font-size:15px}
-.tools{display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px}
-#dotBtn.on{background:var(--acc)}
-.box{display:none;margin:8px 14px;padding:10px;border-radius:14px;background:var(--card);border:3px solid var(--acc)}
+#palBox{grid-column:1/-1;background:var(--card);border-radius:var(--r);padding:10px;box-shadow:0 6px 20px #0002;border:2px solid var(--acc)}
+.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:3px 0}
+.pal button{background:var(--bg);border:2px solid transparent;border-radius:12px;padding:3px 1px;font:700 9.5px Nunito;color:var(--txt);line-height:1.1}
+.pal button.on{border-color:var(--acc);background:var(--card);box-shadow:0 3px 10px #0002}
+.pal svg{width:30px;height:40px;display:block;margin:0 auto}
+.tools{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px}
+.tools button{font:800 14px Nunito;border:0;border-radius:12px;padding:10px 14px;background:var(--card);color:var(--txt);box-shadow:0 2px 10px #0001}
+.tools.mini{padding:6px 0 0}
+.tools.mini button{background:var(--bg);box-shadow:none;padding:8px 12px}
+#dotBtn.on{background:var(--acc);color:#fff}
+.box{display:none;margin:10px 16px;padding:14px;border-radius:var(--r);background:var(--card);box-shadow:0 2px 12px #0001}
 .box.on{display:block}
-.pl{display:flex;gap:8px}
-.pl>div{flex:1;border-radius:12px;padding:8px;text-align:center;border:3px solid #0001}
-.pl>div.turn{border-color:var(--acc)}
-.pl input{width:100%;font:800 15px Nunito;border:0;background:transparent;text-align:center;color:var(--txt)}
-.pl b{font-size:30px;display:block}
-.srow{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:8px;flex-wrap:wrap;font-size:13px}
-.srow button{font:800 13px Nunito;border:2px solid var(--txt);background:var(--card);color:var(--txt);border-radius:8px;padding:4px 10px}
-.srow button.on{background:var(--head);color:#fff;border-color:var(--head)}
-.cent{text-align:center;font-weight:800;margin-top:6px}
-.lv{display:flex;gap:6px;flex-wrap:wrap}
-.lv button{flex:1;font:800 13px Nunito;border:0;border-radius:10px;padding:8px 4px;color:#fff;opacity:.55}
-.lv button.on{opacity:1;box-shadow:0 0 0 3px var(--txt)}
+.pl{display:flex;gap:10px}
+.pl>div{flex:1;border-radius:14px;padding:10px;text-align:center;background:var(--bg);border:2px solid transparent}
+.pl>div.turn{border-color:var(--acc);background:var(--card);box-shadow:0 4px 14px #0002}
+.pl input{width:100%;font:800 15px Nunito;border:0;background:transparent;text-align:center;color:var(--txt);outline:none}
+.pl b{font-size:32px;display:block}
+.srow{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:10px;flex-wrap:wrap;font-size:13px}
+.srow button{font:800 13px Nunito;border:0;background:var(--bg);color:var(--txt);border-radius:10px;padding:7px 12px}
+.srow button.on{background:var(--acc);color:#fff}
+.cent{text-align:center;font-weight:800;margin-top:8px}
+.lv{display:flex;gap:6px;margin-bottom:6px}
+.lv button{font:800 14px Nunito;border:0;border-radius:12px;padding:9px 14px;background:var(--bg);color:var(--txt)}
+.lv button.on{background:var(--acc);color:#fff}
 .nums{display:flex;gap:6px;margin:8px 0;flex-wrap:wrap}
-.nums button{font:800 15px Nunito;width:46px;height:40px;border-radius:10px;border:2px solid var(--txt);background:var(--card);color:var(--txt)}
-.nums button.sg{width:auto;height:auto;border:0;background:none;padding:2px 4px;font:600 13px Nunito;color:var(--txt)}
-.nums button.sg.on{background:none;color:var(--acc);font-weight:800;text-decoration:underline}
-.nums button.on{background:var(--head);color:#fff;border-color:var(--head)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.chips span{font:800 13px Nunito;padding:5px 9px;border-radius:20px;border:2px solid var(--txt)}
-.chips span.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.nums button{font:800 15px Nunito;width:42px;height:42px;border-radius:12px;border:0;color:#fff;box-shadow:0 2px 6px #0002}
+.nums button.on{outline:3px solid var(--txt);outline-offset:2px}
+.nums button.sg{width:auto;height:auto;border:0;background:none;box-shadow:none;padding:2px 4px;font:600 13px Nunito;color:var(--txt);outline:none}
+.nums button.sg.on{color:var(--acc);font-weight:800;text-decoration:underline}
+.sec{font:900 14px Nunito;letter-spacing:.6px;margin:12px 0 2px;opacity:.85}.sec small{font-weight:700;letter-spacing:0;opacity:.7}
+.consegna{margin-top:12px;padding:12px 14px;border-radius:14px;background:var(--bg);border-left:6px solid var(--acc)}
+.ctag{display:inline-block;font:900 12px Nunito;letter-spacing:1px;background:var(--acc);color:#fff;border-radius:8px;padding:3px 9px;margin-bottom:6px}
+#reqLine{font-size:17px;font-weight:800;line-height:1.3}
+.consegna .chips span{background:var(--card);font-size:14px;padding:7px 12px;box-shadow:0 1px 4px #0001}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips span{font:800 12px Nunito;padding:6px 10px;border-radius:20px;background:var(--bg)}
+.chips span.ok{background:var(--ok);color:#fff}
 .shake{animation:sh .35s}
 @keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-footer{text-align:center;font-size:12px;opacity:.6;padding:16px}
+footer{text-align:center;font-size:12px;opacity:.55;padding:10px}
 </style>
 </head>
 <body>
@@ -78,32 +91,29 @@ footer{text-align:center;font-size:12px;opacity:.6;padding:16px}
 <nav>
   <button id="exBtn">📚 Esercizi</button>
   <button id="sfBtn">⚔️ Sfida a due</button>
-  <button id="colBtn">🌈 Note colorate</button>
 </nav>
 <div class="box" id="exBox">
   <div class="lv" id="lvRow"></div>
+  <div class="sec" id="exHead">ESERCITAZIONI <small>(difficoltà crescente)</small></div>
   <div class="nums" id="numRow"></div>
   <div id="exTitle" style="font-weight:800"></div>
-  <div class="srow" id="songTools" style="justify-content:flex-start"><button id="songPlay">▶ Ascolta il motivo</button><button id="slowBtn">🐢 Lento</button><button id="helpBtn"></button><button id="ckBtn">✔ Correggi</button><button id="solBtn"></button><span id="songHint" style="font-size:13px;opacity:.8"></span></div>
-  <div id="reqLine" style="font-size:13px;opacity:.8">Riempi tutte le battute usando ALMENO queste figure:</div>
-  <div class="chips" id="chips"></div>
+  <div class="srow" id="songTools" style="justify-content:flex-start"><button id="songPlay">▶ Ascolta il motivo</button><button id="myPlay">🎧 Ascolta quello che hai scritto</button><button id="slowBtn">🐢 Lento</button><button id="helpBtn"></button><button id="ckBtn">✔ Correggi</button><button id="solBtn"></button><span id="songHint" style="font-size:13px;opacity:.8"></span></div>
+  <div class="consegna"><div class="ctag">📋 CONSEGNA</div><div id="reqLine"></div><div class="chips" id="chips"></div></div>
 </div>
 <div class="box" id="sfida">
   <div class="pl"><div id="p0"><input id="n0"><b id="s0">0</b></div><div id="p1"><input id="n1"><b id="s1">0</b></div></div>
   <div class="srow">Vince chi arriva a: <button data-t="3">3</button><button data-t="5">5</button><button data-t="10">10</button> <button id="sNew">↺ Nuova sfida</button></div>
   <div class="cent" id="sMsg"></div>
 </div>
-<div class="top">
-  <svg id="pie" viewBox="0 0 160 160"></svg>
-  <div id="info"><div class="big" id="barLbl"></div><div id="rest"></div><div id="msg"></div></div>
-</div>
+<div id="msg"></div><span id="barLbl" hidden></span><span id="rest" hidden></span>
 <div class="hint">1) Scegli una figura qui sotto · 2) Tocca il pentagramma all'altezza della nota che vuoi</div>
 <div id="staff"></div>
-<h3>Note</h3><div class="pal" id="palN"></div>
-<h3>Pause</h3><div class="pal" id="palR"></div>
-<div class="tools">
+<div id="palBox"><div class="pal" id="palN"></div><div class="pal" id="palR"></div>
+<div class="tools mini">
   <button id="dotBtn">• Punto di valore</button>
   <button id="undo">↶ Annulla</button>
+</div></div>
+<div class="tools">
   <button id="clrBar">Svuota battuta</button>
   <button id="addBar">+ Battuta</button>
   <button id="play">▶ Ascolta</button>
@@ -146,23 +156,29 @@ const CANZ=[["Fra Martino", "4/4", "c4 d4 e4 c4|c4 d4 e4 c4|e4 f4 g2|e4 f4 g2"],
 const PL={};'cdefgab'.split('').forEach((c,i)=>PL[c]=i-2);'CDEFGA'.split('').forEach((c,i)=>PL[c]=i+5);
 const DU={'1':32,'2':16,'4':8,'8':4,'s':2};
 function parseSong(m){return m.split('|').map(b=>b.trim().split(/\s+/).map(t=>{const g=t.match(/^([a-gA-Gr])([1248s])(\.?)$/),dot=!!g[3],r=g[1]==='r';return{b:DU[g[2]],d:DU[g[2]]*(dot?1.5:1),dot,r,p:r?4:PL[g[1]]}}))}
+let SLO=false;
 const isSong=()=>E.on&&(E.lv==='CANZONCINE'||E.lv==='DETTATO');
 const isDict=()=>E.on&&E.lv==='DETTATO';
-const exList=lv=>(lv==='CANZONCINE'||lv==='DETTATO')?CANZ:EX[lv];
+const EXL=[...EX.FACILE,...EX.MEDIO,...EX.DIFFICILE,...EX.ESPERTO];
+const hue=i=>`hsl(${Math.round(130-130*i/(EXL.length-1))},68%,44%)`;
+const exList=lv=>(lv==='CANZONCINE'||lv==='DETTATO')?CANZ:EXL;
 let TGT=[];
 
 let S={num:4,den:4,bars:[[],[],[],[]],act:0,sel:{b:8,r:false},dot:false,theme:'Classico',pc:true};
 let SF={on:false,sc:[0,0],t:0,tg:5,names:['Giocatore 1','Giocatore 2'],end:false};
 let E={on:false,lv:'FACILE',i:0,done:{},ok:false,help:true};
 const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
-S=Object.assign(S,ld('rb2S')||{});SF=Object.assign(SF,ld('rb2F')||{});E=Object.assign(E,ld('rb2E')||{});if(E.lv==='DETTATO'){E.lv='CANZONCINE';E.i=0}
+S=Object.assign(S,ld('rb2S')||{});SF=Object.assign(SF,ld('rb2F')||{});E=Object.assign(E,ld('rb2E')||{});S.pc=true;if(E.lv!=='CANZONCINE'){E.lv='ESERCIZI';if(E.i>=24)E.i=0}if(E.lv==='DETTATO'){E.lv='CANZONCINE';E.i=0}
 const save=()=>{try{localStorage.setItem('rb2S',JSON.stringify(S));localStorage.setItem('rb2F',JSON.stringify(SF));localStorage.setItem('rb2E',JSON.stringify(E))}catch(e){}};
 const $=id=>document.getElementById(id);
+const PB=document.getElementById('palBox');
 const cap=()=>S.num*32/S.den, tot=b=>b.reduce((a,n)=>a+n.d,0);
 const Y=p=>98-6*p;
 const pn=p=>((p+2)%7+7)%7;
 let INK='#2b2340';
 const key=n=>n.b+(n.dot?'.':'')+(n.r?'r':'');
+const PLUR={32:'semibrevi',16:'minime',8:'semiminime',4:'crome',2:'semicrome'};
+const kplur=(k,n)=>{const b=parseInt(k),dot=k.includes('.'),r=k.includes('r');if(n===1)return kname(k).toLowerCase();return r?'pause di '+FN[b].toLowerCase()+(dot?' puntata':''):PLUR[b]+(dot?' puntate':'')};
 const kname=k=>{const b=parseInt(k),dot=k.includes('.'),r=k.includes('r');return r?'Pausa di '+FN[b].toLowerCase()+(dot?' puntata':''):FN[b]+(dot?' puntata':'')};
 const ncol=(n,j)=>n.r?(S.pc?RESTCOL:INK):(S.pc?PCOL[pn(n.p)]:INK);
 const wcol=(n,j)=>n.r?RESTCOL:PCOL[pn(n.p)];
@@ -211,41 +227,41 @@ function pieSVG(bar,cx,cy,r,nums){
 function renderStaff(){
   const C=cap(),el=$('staff');el.innerHTML='';
   S.bars.forEach((bar,i)=>{
-    const first=i===0,lead=first?78:14,W=lead+270,t=tot(bar),den=Math.max(C,t);
+    const first=i===0,lead=first?84:14,W=360,NW=W-lead-34,t=tot(bar),den=Math.max(C,t);
     let s=`<svg viewBox="0 -46 ${W} 196">`;
     const mx=W/2;
-    s+=pieSVG(bar,mx,-22,19,false)+`<text x="${mx+30}" y="-17" font-size="13" font-weight="800" fill="${INK}">${i+1}</text>`;
+    s+=pieSVG(bar,mx,-22,19,false)+`<text x="12" y="-17" font-size="13" font-weight="800" fill="${INK}" opacity="${i===S.act?1:.6}">Battuta ${i+1} di ${S.bars.length}</text>`;
     for(let k=0;k<5;k++)s+=`<line x1="0" x2="${W}" y1="${50+12*k}" y2="${50+12*k}" stroke="${INK}" stroke-width="1.3"/>`;
     s+=`<line x1="${W-1}" x2="${W-1}" y1="50" y2="98" stroke="${INK}" stroke-width="2"/>`;
-    if(first)s+=`<text x="2" y="104" font-family="Noto Music" font-size="72" fill="${INK}">𝄞</text><text x="58" y="72" font-size="26" font-weight="800" text-anchor="middle" font-family="Georgia,serif" fill="${INK}">${S.num}</text><text x="58" y="96" font-size="26" font-weight="800" text-anchor="middle" font-family="Georgia,serif" fill="${INK}">${S.den}</text>`;
-    for(let k=1;k<S.num;k++){const gx=lead+12+k/S.num*250;s+=`<line x1="${gx}" x2="${gx}" y1="44" y2="104" stroke="${INK}" stroke-opacity=".15" stroke-dasharray="3 3"/>`}
-    if(isSong()&&(isDict()?E.sol:E.help)&&TGT[i]){let o=0;s+='<g opacity=".28">';TGT[i].forEach(n=>{const x=lead+20+o/C*250;s+=noteSVG(x,n.p,n.b,n.dot,n.r,INK);if(!n.r)s+=`<text x="${x}" y="128" font-size="10" text-anchor="middle" fill="${INK}">${NAMES[pn(n.p)]}</text>`;o+=n.d});s+='</g>'}
+    if(first)s+=`<text x="4" y="104" font-family="Noto Music" font-size="72" fill="${INK}">𝄞</text><text x="66" y="71.6" font-size="27" font-weight="900" text-anchor="middle" font-family="Georgia,serif" fill="${INK}">${S.num}</text><text x="66" y="95.6" font-size="27" font-weight="900" text-anchor="middle" font-family="Georgia,serif" fill="${INK}">${S.den}</text>`;
+    for(let k=1;k<S.num;k++){const gx=lead+12+k/S.num*NW;s+=`<line x1="${gx}" x2="${gx}" y1="44" y2="104" stroke="${INK}" stroke-opacity=".15" stroke-dasharray="3 3"/>`}
+    if(isSong()&&(isDict()?E.sol:E.help)&&TGT[i]){let o=0;s+='<g opacity=".28">';TGT[i].forEach(n=>{const x=lead+20+o/C*NW;s+=noteSVG(x,n.p,n.b,n.dot,n.r,INK);if(!n.r)s+=`<text x="${x}" y="128" font-size="10" text-anchor="middle" fill="${INK}">${NAMES[pn(n.p)]}</text>`;o+=n.d});s+='</g>'}
     let off=0;
-    bar.forEach((n,j)=>{const x=lead+20+off/den*250,col=off+n.d>C||n.ck===1?'#e5484d':n.ck===2?'#2bb673':ncol(n,j);
-      s+=noteSVG(x,n.p,n.b,n.dot,n.r,col);
+    bar.forEach((n,j)=>{const x=lead+20+off/den*NW,col=off+n.d>C||n.ck===1?'#e5484d':n.ck===2?'#2bb673':ncol(n,j);
+      s+=noteSVG(x,n.p,n.b,n.dot,n.r,col);if(n.w)s+=`<circle cx="${x}" cy="${Y(n.p)}" r="12" fill="none" stroke="#e5484d" stroke-width="2.5" stroke-dasharray="4 3"/><text x="${x}" y="${Y(n.p)-15}" font-size="13" font-weight="900" text-anchor="middle" fill="#e5484d">✗</text>`;
       if(!n.r)s+=`<text x="${x}" y="140" font-size="11" text-anchor="middle" fill="${col}" font-weight="800">${NAMES[pn(n.p)]}</text>`;
       off+=n.d});
     s+='</svg>';
     const div=document.createElement('div');
     div.className='bar'+(i===S.act?' act':'')+(t===C?' full':'')+(t>C?' over':'');
-    div.innerHTML=s;el.appendChild(div);
+    div.innerHTML=s;el.appendChild(div);if(i===S.act)el.appendChild(PB);
     const svg=div.firstChild;
     svg.addEventListener('pointerdown',e=>{
       const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
       const q=pt.matrixTransform(svg.getScreenCTM().inverse());
-      if(first&&q.x<74&&q.y>40){toggle('tsPanel',true);return}
+      if(first&&q.x<80&&q.y>40){toggle('tsPanel',true);return}
       S.act=i;insert(i,Math.max(-2,Math.min(10,Math.round((98-q.y)/6))),div);
     });
   });
 }
 function renderPie(){
   const C=cap(),bar=S.bars[S.act]||[],t=tot(bar);
-  $('pie').innerHTML=pieSVG(bar,80,80,64,true);
-  $('barLbl').textContent=`Battuta ${S.act+1} di ${S.bars.length} · ${S.num}/${S.den}`;
+  
+  $('barLbl').style.display='none';
   $('rest').textContent=t>=C?(t===C?'Piena! ✔':'Troppe note!'):'Manca: '+decomp(C-t);
 }
 function decomp(r){const o=[];for(const[v,n]of FIG)while(r>=v){o.push(n);r-=v}if(r>0)o.push('punto');return o.join(' + ')}
-function msg(t,c){const m=$('msg');m.textContent=t;m.className=c||''}
+let MT;function msg(t,c){const m=$('msg');m.textContent=t;m.className=(c||'')+(t?' show':'');clearTimeout(MT);if(t)MT=setTimeout(()=>m.classList.remove('show'),2600)}
 
 function insert(i,p,div){
   if(SF.on&&SF.end){msg('Sfida finita! Premi Nuova sfida','bad');return}
@@ -255,11 +271,12 @@ function insert(i,p,div){
     if(SF.on&&tot(bar)<C)sfErr();renderPie();render();return}
   S.bars.forEach(b=>b.forEach(n=>delete n.ck));
   if(isSong()&&!isDict()){const tg=TGT[i][bar.length];
-    if(tg&&(tg.b!==S.sel.b||tg.dot!==S.dot||tg.r!==S.sel.r||(!tg.r&&tg.p!==p))){
+    var WRONG=tg&&!tg.r&&!S.sel.r&&tg.p!==p;
+    if(tg&&(tg.b!==S.sel.b||tg.dot!==S.dot||tg.r!==S.sel.r)){
       div.classList.remove('shake');void div.offsetWidth;div.classList.add('shake');
       let h=tg.r!==S.sel.r?(tg.r?'Qui ci vuole una pausa!':'Qui ci vuole una nota, non una pausa!'):(tg.b!==S.sel.b||tg.dot!==S.dot)?'Figura sbagliata: guarda bene la durata'+(tg.dot?' (c\'è il punto!)':''):(tg.p>p?'Nota troppo bassa: sali!':'Nota troppo alta: scendi!');
       if(!tg.r&&!S.sel.r&&tg.p!==p)tone(p,.25);msg('❌ '+h,'bad');return}}
-  bar.push({b:S.sel.b,d,dot:S.dot,r:S.sel.r,p:S.sel.r?4:p});
+  bar.push({b:S.sel.b,d,dot:S.dot,r:S.sel.r,p:S.sel.r?4:p,w:isSong()&&!isDict()&&typeof WRONG!=='undefined'&&WRONG});
   if(!S.sel.r)tone(p,0.35);
   if(tot(bar)===C){msg('🎉 Battuta completa!','ok');if(SF.on)sfOk();
     if(i===S.bars.length-1){if(!E.on)S.bars.push([]),S.act=i+1}else S.act=i+1}
@@ -280,7 +297,7 @@ function palette(){
     const c=S.pc?(r?RESTCOL:PCOL[[0,1,2,3,4][FIG.findIndex(f=>f[0]==b)]]):INK;
     bt.innerHTML=`<svg viewBox="${r?'-20 50 40 60':'-14 46 40 60'}">${noteSVG(r?0:-1,r?4:1,b,S.dot,r,c)}</svg>${r?'Pausa di '+n.toLowerCase():n}${S.dot?' puntata':''}`;
     bt.onclick=()=>{S.sel={b,r};palette();ac();save()};el.appendChild(bt)})};
-  mk($('palN'),false);mk($('palR'),true);$('dotBtn').classList.toggle('on',S.dot);$('colBtn').classList.toggle('on',S.pc);
+  mk(PB.querySelector('#palN'),false);mk(PB.querySelector('#palR'),true);PB.querySelector('#dotBtn').classList.toggle('on',S.dot);
 }
 function toggle(id,force){const p=$(id);p.classList.toggle('open',force===undefined?!p.classList.contains('open'):force)}
 function renderTS(){$('tsBtn').innerHTML=`${S.num}/${S.den}<small>tempo</small>`;const p=$('tsPanel');p.innerHTML='';
@@ -316,42 +333,46 @@ function exData(){return exList(E.lv)[E.i]}
 function exStart(lv,i){E.on=true;E.lv=lv;E.i=i;E.ok=false;let [ts,nb]=exData();E.sol=false;if(lv==='CANZONCINE'||lv==='DETTATO'){const c=exData();ts=c[1];TGT=parseSong(c[2]);nb=TGT.length}const [n,d]=ts.split('/').map(Number);
   S.num=n;S.den=d;S.bars=Array.from({length:nb},()=>[]);S.act=0;
   if(SF.on){SF.on=false;sfRender()}
-  msg('Esercizio '+lv+' '+(i+1)+': via!','');save();exRender();render()}
+  msg(lv==='CANZONCINE'?'🎶 '+CANZ[i][0]+': via!':'Esercizio '+(i+1)+': via!','');save();exRender();render()}
 function exCounts(){const c={};S.bars.forEach(b=>b.forEach(n=>{const k=key(n);c[k]=(c[k]||0)+1}));return c}
-function exChips(){$('reqLine').style.display=isSong()?'none':'';$('songTools').style.display=isSong()?'flex':'none';$('helpBtn').textContent=E.help?'👁 Aiuto: SÌ':'🙈 Aiuto: NO';['helpBtn'].forEach(id=>$(id).style.display=isDict()?'none':'');['slowBtn','ckBtn','solBtn'].forEach(id=>$(id).style.display=isDict()?'':'none');$('songHint').textContent=isDict()?'Ascolta e scrivi il motivo! Si parte da: '+(TGT[0]&&TGT[0][0]&&!TGT[0][0].r?NAMES[pn(TGT[0][0].p)]:'pausa')+' · '+TGT.length+' battute in '+S.num+'/'+S.den:'Copia il motivo nota per nota!';$('solBtn').textContent=E.sol?'🙈 Nascondi soluzione':'💡 Soluzione';if(isSong()){$('chips').innerHTML='';return}
+function exChips(){$('exHead').style.display=isSong()?'none':'';$('songHint').style.display='none';
+  $('reqLine').innerHTML=isSong()?`Ricopia nota per nota il motivo <u>${exData()[0]}</u>: scegli la figura giusta e tocca l'altezza giusta sul pentagramma.`:`Riempi le ${S.bars.length} battute in ${S.num}/${S.den} usando <u>ALMENO</u> queste figure:`;$('songTools').style.display=isSong()?'flex':'none';$('helpBtn').textContent=E.help?'👁 Aiuto: SÌ':'🙈 Aiuto: NO';['helpBtn'].forEach(id=>$(id).style.display=isDict()?'none':'');['slowBtn','ckBtn','solBtn'].forEach(id=>$(id).style.display=isDict()?'':'none');$('songHint').textContent=isDict()?'Ascolta e scrivi il motivo! Si parte da: '+(TGT[0]&&TGT[0][0]&&!TGT[0][0].r?NAMES[pn(TGT[0][0].p)]:'pausa')+' · '+TGT.length+' battute in '+S.num+'/'+S.den:'Copia il motivo nota per nota!';$('solBtn').textContent=E.sol?'🙈 Nascondi soluzione':'💡 Soluzione';if(isSong()){$('chips').innerHTML='';return}
   const req=exData()[2],c=exCounts();
-  $('chips').innerHTML=Object.entries(req).map(([k,v])=>{const h=Math.min(c[k]||0,v);return `<span class="${h>=v?'ok':''}">${h>=v?'✓ ':''}${h}/${v} ${kname(k)}</span>`}).join('')}
+  $('chips').innerHTML=Object.entries(req).map(([k,v])=>{const h=Math.min(c[k]||0,v);return `<span class="${h>=v?'ok':''}">${h>=v?'✓ ':''}${v} ${kplur(k,v)}${h>0&&h<v?' <small>('+h+' fatt'+(h>1?'e':'a')+')</small>':''}</span>`}).join('')}
 function exCheck(){const C=cap();if(!S.bars.every(b=>tot(b)===C))return;
   if(isDict()){setTimeout(()=>msg('Battute piene! Premi ✔ Correggi','ok'),20);return}
-  if(isSong()){setTimeout(()=>{E.ok=true;E.done[E.lv+E.i]=1;msg('⭐ Motivo completato! Ascoltalo con ▶','ok');fanfare();save();exRender()},20);return}
+  if(isSong()){const nw=S.bars.reduce((a,b)=>a+b.filter(n=>n.w).length,0);setTimeout(()=>{if(!nw){E.ok=true;E.done[E.lv+E.i]=1;msg('⭐ Motivo completato! Premi «Ascolta quello che hai scritto»','ok');fanfare()}else msg('Hai finito! '+nw+(nw>1?' note diverse':' nota diversa')+' dall\'originale (in rosso): ascolta e confronta!','bad');save();exRender()},20);return}
   const req=exData()[2],c=exCounts(),miss=Object.entries(req).filter(([k,v])=>(c[k]||0)<v);
   setTimeout(()=>{if(!miss.length){E.ok=true;E.done[E.lv+E.i]=1;msg('⭐ Esercizio superato! Bravissimo!','ok');fanfare();save();exRender()}
     else msg('Battute piene, ma mancano: '+miss.map(([k,v])=>(v-(c[k]||0))+' '+kname(k)).join(', ')+'. Premi Annulla e riprova!','bad')},20)}
 function exRender(){$('exBox').classList.toggle('on',E.on);$('exBtn').classList.toggle('on',E.on);if(!E.on)return;
-  $('lvRow').innerHTML='';[...Object.keys(EX),'CANZONCINE'].forEach(lv=>{const b=document.createElement('button');b.textContent=lv==='CANZONCINE'?'🎶 CANZONCINE':lv==='DETTATO'?'🎧 DETTATO':lv;b.style.background=LVCOL[lv];
-    b.className=lv===E.lv?'on':'';b.onclick=()=>exStart(lv,0);$('lvRow').appendChild(b)});
+  $('lvRow').innerHTML='';['CANZONCINE'].forEach(lv=>{const b=document.createElement('button');b.textContent=lv==='CANZONCINE'?'🎶 CANZONCINE':lv==='DETTATO'?'🎧 DETTATO':lv;b.style.background=LVCOL[lv];
+    b.className=lv===E.lv?'on':'';b.style.background='';b.onclick=()=>{SLO=E.lv!=='CANZONCINE';exStart(E.lv==='CANZONCINE'?'ESERCIZI':'CANZONCINE',0)};$('lvRow').appendChild(b)});
+  if(isSong()){const t=document.createElement('button');t.textContent=(SLO?'▴ Chiudi elenco':'▾ Scegli la canzoncina')+' ('+CANZ.length+')';t.onclick=()=>{SLO=!SLO;exRender()};$('lvRow').appendChild(t)}
+  $('numRow').style.display=isSong()&&!SLO?'none':'flex';
   $('numRow').innerHTML='';exList(E.lv).forEach((_,i)=>{const b=document.createElement('button');b.textContent=(isSong()?(i+1)+'. '+CANZ[i][0]:(i+1))+(E.done[E.lv+i]?' ⭐':'');
-    b.className=(isSong()?'sg ':'')+(i===E.i?'on':'');b.onclick=()=>exStart(E.lv,i);$('numRow').appendChild(b)});
-  const xd=exData(),ts=isSong()?xd[1]:xd[0],nb=isSong()?TGT.length:xd[1];$('exTitle').innerHTML=`<span style="color:${LVCOL[E.lv]}">${isSong()?(isDict()?'🎧 ':'🎶 ')+xd[0]:E.lv+' '+(E.i+1)}</span> · tempo ${ts} · ${nb} battut${nb>1?'e':'a'}`+(E.ok?' · ⭐ Superato!':'');
+    b.className=(isSong()?'sg ':'')+(i===E.i?'on':'');if(!isSong())b.style.background=hue(i);b.onclick=()=>{SLO=false;exStart(E.lv,i)};$('numRow').appendChild(b)});
+  const xd=exData(),ts=isSong()?xd[1]:xd[0],nb=isSong()?TGT.length:xd[1];$('exTitle').innerHTML=`<span style="color:${isSong()?LVCOL.CANZONCINE:hue(E.i)}">${isSong()?(isDict()?'🎧 ':'🎶 ')+xd[0]:'Esercizio '+(E.i+1)}</span> · tempo ${ts} · ${nb} battut${nb>1?'e':'a'}`+(E.ok?' · ⭐ Superato!':'');
   exChips()}
 
 /* ---- PULSANTI ---- */
 $('tsBtn').onclick=()=>toggle('tsPanel');
 $('thBtn').onclick=()=>toggle('thPanel');
-$('colBtn').onclick=()=>{S.pc=!S.pc;save();render()};
+
 $('exBtn').onclick=()=>{if(E.on){E.on=false;save();exRender()}else exStart(E.lv,E.i)};
 $('sfBtn').onclick=()=>{SF.on=!SF.on;if(SF.on){if(E.on){E.on=false;exRender()}sfNew()}else sfRender()};
 $('sNew').onclick=sfNew;
 document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{SF.tg=+b.dataset.t;sfRender()});
 [0,1].forEach(k=>$('n'+k).oninput=e=>{SF.names[k]=e.target.value||('Giocatore '+(k+1));save()});
-$('dotBtn').onclick=()=>{S.dot=!S.dot;palette();msg(S.dot?'Punto attivo: la figura vale una volta e mezza':'Punto tolto','');save()};
-$('undo').onclick=()=>{let i=S.act;if(!S.bars[i].length&&i>0)i--;S.act=i;S.bars[i].pop();E.ok=false;msg('','');save();render();if(E.on)exRender()};
+PB.querySelector('#dotBtn').onclick=()=>{S.dot=!S.dot;palette();msg(S.dot?'Punto attivo: la figura vale una volta e mezza':'Punto tolto','');save()};
+PB.querySelector('#undo').onclick=()=>{let i=S.act;if(!S.bars[i].length&&i>0)i--;S.act=i;S.bars[i].pop();E.ok=false;msg('','');save();render();if(E.on)exRender()};
 $('clrBar').onclick=()=>{S.bars[S.act]=[];msg('Battuta svuotata','');save();render()};
 $('addBar').onclick=()=>{S.bars.push([]);S.act=S.bars.length-1;save();render()};
 $('clrAll').onclick=()=>{if(E.on){exStart(E.lv,E.i);return}S.bars=[[],[],[],[]];S.act=0;msg('Si ricomincia!','');save();render()};
 $('play').onclick=()=>{const a=ac();let t=a.currentTime+.1;const u=0.6/8*(S.den==8?2:1);
   S.bars.forEach(b=>b.forEach(n=>{if(!n.r)tone(n.p,n.d*u*.97,t);t+=n.d*u}))};
 const playT=k=>{const a=ac();let t=a.currentTime+.1;const u=k*0.6/8*(S.den==8?2:1);TGT.forEach(b=>b.forEach(n=>{if(!n.r)tone(n.p,n.d*u*.97,t);t+=n.d*u}))};
+$('myPlay').onclick=()=>$('play').click();
 $('slowBtn').onclick=()=>playT(1.7);
 $('solBtn').onclick=()=>{E.sol=!E.sol;save();render()};
 $('ckBtn').onclick=()=>{let g=0,tot2=0;TGT.forEach((tb,i)=>{const ub=S.bars[i]||[];tb.forEach((t,j)=>{tot2++;const n=ub[j];const ok=n&&n.b===t.b&&n.dot===t.dot&&n.r===t.r&&(t.r||n.p===t.p);if(n)n.ck=ok?2:1;if(ok)g++});ub.slice(tb.length).forEach(n=>n.ck=1)});
