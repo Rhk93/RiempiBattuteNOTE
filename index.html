@@ -119,6 +119,14 @@ footer{text-align:center;font-size:12px;opacity:.55;padding:10px}
 .zoomtip{font-size:12px;opacity:.55;padding:6px 18px 2px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .tools button{font-size:13px;padding:9px 12px}
 nav button{padding:10px;font-size:14px}
+
+/* turno sfida */
+.pl>div{transition:all .25s;opacity:.55}
+.pl>div.turn{opacity:1;background:var(--acc);border-color:var(--acc);color:#fff;transform:scale(1.06);box-shadow:0 8px 22px #0003}
+.pl>div.turn input{color:#fff}
+.pl>div.turn::before{content:"👉 TOCCA A TE";display:block;font:900 12px Nunito;letter-spacing:1px;background:#fff;color:var(--acc);border-radius:8px;padding:3px 6px;margin:-2px auto 6px;width:max-content;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+#sMsg{font-size:20px;padding:12px;border-radius:14px;background:var(--head);color:#fff;margin-top:12px}
 </style>
 </head>
 <body>
@@ -146,8 +154,7 @@ nav button{padding:10px;font-size:14px}
 </div>
 <div class="box" id="sfida">
   <div class="pl"><div id="p0"><input id="n0"><b id="s0">0</b></div><div id="p1"><input id="n1"><b id="s1">0</b></div></div>
-  <div class="lv" style="margin-top:10px"><button id="sfM0">🎼 Battute libere</button><button id="sfM1">🎶 Canzoncine</button></div>
-  <div id="sfFree" class="srow">Vince chi arriva a: <button data-t="3">3</button><button data-t="5">5</button><button data-t="10">10</button></div>
+  <div hidden><button id="sfM0"></button><button id="sfM1"></button></div><div id="sfFree" hidden></div>
   <div id="sfCanz"><div class="srow" style="justify-content:flex-start"><select id="sfSong" class="sel"></select><button id="sfRnd">🎲 A caso</button></div>
     <div class="prow"><button id="sfPlay" class="big">▶ Ascolta il motivo</button><button id="sfMy">🎧 Ascolta ciò che abbiamo scritto</button></div>
     <div class="sub2">Una nota a testa: nota giusta = +1 punto, nota sbagliata = 0 punti e il turno passa all'altro.</div></div>
@@ -214,10 +221,10 @@ const exList=lv=>(lv==='CANZONCINE'||lv==='DETTATO')?CANZ:EXL;
 let TGT=[];
 
 let S={num:4,den:4,bars:[[],[],[],[]],act:0,sel:{b:8,r:false},dot:false,theme:'Celeste',pc:true};
-let SF={mode:'free',song:0,on:false,sc:[0,0],t:0,tg:5,names:['Giocatore 1','Giocatore 2'],end:false};
+let SF={mode:'canz',song:0,on:false,sc:[0,0],t:0,tg:5,names:['Giocatore 1','Giocatore 2'],end:false};
 let E={on:false,lv:'FACILE',i:0,done:{},ok:false,help:true};
 const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
-S=Object.assign(S,ld('rb2S')||{});SF=Object.assign(SF,ld('rb2F')||{});E=Object.assign(E,ld('rb2E')||{});E.pts=E.pts||{};E.help=false;S.pc=true;if(E.lv!=='CANZONCINE'){E.lv='ESERCIZI';if(E.i>=24)E.i=0}if(E.lv==='DETTATO'){E.lv='CANZONCINE';E.i=0}
+S=Object.assign(S,ld('rb2S')||{});SF=Object.assign(SF,ld('rb2F')||{});SF.mode='canz';E=Object.assign(E,ld('rb2E')||{});E.pts=E.pts||{};E.help=false;S.pc=true;if(E.lv!=='CANZONCINE'){E.lv='ESERCIZI';if(E.i>=24)E.i=0}if(E.lv==='DETTATO'){E.lv='CANZONCINE';E.i=0}
 const save=()=>{try{localStorage.setItem('rb2S',JSON.stringify(S));localStorage.setItem('rb2F',JSON.stringify(SF));localStorage.setItem('rb2E',JSON.stringify(E))}catch(e){}};
 const $=id=>document.getElementById(id);
 const PB=document.getElementById('palBox');
@@ -465,7 +472,7 @@ function renderSet(){const p=$('setPanel');p.innerHTML='<div class="setl">STRUME
 renderSet();
 
 $('exBtn').onclick=()=>{if(E.on){E.on=false;save();exRender()}else exStart(E.lv,E.i)};
-$('sfM0').onclick=()=>{SF.mode='free';sfNew()};
+
 $('sfM1').onclick=()=>{SF.mode='canz';sfNew()};
 $('sfSong').onchange=e=>{SF.song=+e.target.value;sfNew()};
 $('sfRnd').onclick=()=>{SF.song=Math.floor(Math.random()*CANZ.length);sfNew()};
